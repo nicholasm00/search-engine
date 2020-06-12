@@ -1,8 +1,11 @@
 .searchBar {
   width: 500px;
-  background-color: white;
 
   &__icon {
     color: gray;
   }
+}
+
+.MuiInputBase-root {
+  background-color: white;
 }

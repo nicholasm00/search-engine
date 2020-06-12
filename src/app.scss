@@ -3,6 +3,15 @@
   height: 100%;
   width: 100%;
 
+  &__corner {
+    position: absolute;
+
+    &.-topRight {
+      top: 10px;
+      right: 10px;
+    }
+  }
+
   &__dashboard {
     position: absolute;
     top: 50%;
@@ -10,7 +19,6 @@
     transform: translate(-50%, -50%);
     width: 600px;
     height: 500px;
-    background-color: white;
     display: flex;
     flex-direction: vertical;
     justify-content: center;

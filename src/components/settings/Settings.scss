@@ -1,0 +1,23 @@
+.settings {
+  &__icon {
+    color: gray;
+  }
+}
+
+.settingsCard {
+  width: 300px;
+  margin: 10px;
+  font-size: 14px;
+}
+
+.-dark {
+  .settings {
+    &__icon {
+      color: #a1a1a1;
+    }
+  }
+
+  .settingsCard {
+    background-color: #393939;
+  }
+}

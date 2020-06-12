@@ -1,3 +1,40 @@
+html {
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: #eeeeee;
+
+  &.-dark {
+    background-color: #1d1d1d;
+
+    span, label {
+      color: #ffffffde;;
+    }
+
+    path {
+      color: #cfcfcf;
+    }
+
+    .MuiSwitch-track {
+      background-color: #d3d3d3 !important;
+    }
+
+    .MuiIconButton-root:hover, .MuiListItem-button:hover {
+      background-color: #ffffff0a;
+    }
+
+    .MuiInputBase-root {
+      background-color: #131313;
+    }
+
+    fieldset {
+      border-color: #ffffff3b;
+    }
+
+    input {
+      color: white;
+    }
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +47,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.MuiTooltip-tooltip {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
 }
