@@ -6,8 +6,8 @@ import SearchIcon from '@material-ui/icons/Search';
 
 export default function ColorTextFields() {
   return (
-    <form noValidate autoComplete="off">
-      <TextField
+    <form autoComplete="off">
+      <TextField className="searchBar"
         id="outlined-secondary"
         label="Search..."
         variant="outlined"
@@ -15,7 +15,7 @@ export default function ColorTextFields() {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <SearchIcon className="searchIcon" />
+              <SearchIcon className="searchBar__icon" />
             </InputAdornment>
           ),
         }}

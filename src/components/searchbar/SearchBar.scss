@@ -1,8 +1,8 @@
-#outlined-secondary {
+.searchBar {
   width: 500px;
   background-color: white;
-}
 
-.searchIcon {
-  color: gray;
+  &__icon {
+    color: gray;
+  }
 }

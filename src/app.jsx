@@ -5,10 +5,8 @@ import SearchBar from "./components/searchbar/SearchBar";
 export default function App() {
   return (
     <div className="app">
-      <div className="main">
-        <div className="searchBarContainer">
-          <SearchBar />
-        </div>
+      <div className="app__dashboard">
+        <SearchBar />
       </div>
     </div>
   )

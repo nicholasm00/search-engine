@@ -2,21 +2,18 @@
   position: absolute;
   height: 100%;
   width: 100%;
-}
 
-.main {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 500px;
-  background-color: white;
-}
-
-.searchBarContainer {
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  transform: translate(-50%, -50%);
+  &__dashboard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 500px;
+    background-color: white;
+    display: flex;
+    flex-direction: vertical;
+    justify-content: center;
+    align-items: center;
+  }
 }
