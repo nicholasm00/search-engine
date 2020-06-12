@@ -3,10 +3,10 @@ html {
   background-color: #eeeeee;
 
   &.-dark {
-    background-color: #111111;
+    background-color: #1d1d1d;
 
-    span {
-      color: white;
+    span, label {
+      color: #ffffffde;;
     }
 
     path {
@@ -17,12 +17,20 @@ html {
       background-color: #d3d3d3 !important;
     }
 
-    .MuiIconButton-root:hover {
+    .MuiIconButton-root:hover, .MuiListItem-button:hover {
       background-color: #ffffff0a;
     }
 
-    .MuiListItem-button:hover {
-      background-color: #ffffff0a;
+    .MuiInputBase-root {
+      background-color: #131313;
+    }
+
+    fieldset {
+      border-color: #ffffff3b;
+    }
+
+    input {
+      color: white;
     }
   }
 }
