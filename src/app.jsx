@@ -2,6 +2,7 @@ import React from 'react';
 import './app.scss';
 import Settings from './components/settings/Settings';
 import SearchBar from './components/searchbar/SearchBar';
+import Button from './components/button/Button';
 
 export default function App() {
   return (
@@ -11,6 +12,17 @@ export default function App() {
       </div>
       <div className="app__dashboard">
         <SearchBar />
+        <div className="app__dashboard__buttons">
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+          <Button></Button>
+        </div>
       </div>
     </div>
   );

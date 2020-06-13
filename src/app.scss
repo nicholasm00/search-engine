@@ -18,10 +18,21 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 600px;
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: vertical;
     justify-content: center;
     align-items: center;
+
+    &__buttons {
+      position: absolute;
+      width: 90%;
+      height: 40%;
+      top: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 }
