@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Settings from './components/settings/Settings';
 import SearchBar from './components/searchbar/SearchBar';
-import Button from './components/button/Button';
+import SearchButton from './components/searchbutton/SearchButton';
 import { data } from './data';
 import './app.scss';
 
@@ -14,19 +14,15 @@ export default function App() {
         <Settings />
       </div>
       <div className="app__dashboard">
-        <SearchBar />
+        <SearchBar searchData={currSearch || {}} />
         <div className="app__dashboard__buttons">
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
-          <Button></Button>
+          <SearchButton></SearchButton>
+          <SearchButton></SearchButton>
+          <SearchButton></SearchButton>
+          <SearchButton></SearchButton>
+          <SearchButton></SearchButton>
+          <SearchButton></SearchButton>
         </div>
-        <SearchBar searchData={currSearch} />
       </div>
     </div>
   );

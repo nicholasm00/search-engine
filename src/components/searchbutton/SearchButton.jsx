@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import './Button.scss';
+import React from "react";
+import './SearchButton.scss';
 
 export default function Button() {
   return (
