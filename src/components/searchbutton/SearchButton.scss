@@ -1,8 +1,9 @@
 .button {
+  position: relative;
   height: 145px;
   width: 100px;
   border-radius: 7px;
-  background-color: pink;
+  background-color: lightblue;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -11,6 +12,7 @@
   outline: 0;
   border: none;
   cursor: pointer;
+  margin: 5px;
 
   &__icon {
     margin: 25px 0 15px 0;
@@ -28,5 +30,18 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    line-height: 20px;
+  }
+
+  &__delete {
+    position: absolute;
+    bottom: 75%;
+    left: 45%;
+    width: 30px;
+    height: 30px;
+
+    &__icon {
+      position: absolute;
+    }
   }
 }
