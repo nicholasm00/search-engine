@@ -1,17 +1,19 @@
 .button {
-  height: 100px;
-  width: 90px;
+  height: 145px;
+  width: 100px;
   border-radius: 7px;
-  background-color: gray;
+  background-color: pink;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-bottom: 5%;
-  margin: 5px;
+  outline: 0;
+  border: none;
+  cursor: pointer;
 
   &__icon {
-    margin: 25px 0 5px 0;
+    margin: 25px 0 15px 0;
     background-color: white;
     border-radius: 50%;
     width: 60px;
@@ -19,6 +21,12 @@
   }
 
   &__label {
+    overflow: hidden;
+    width: 70px;
     font-size: 15px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 }
