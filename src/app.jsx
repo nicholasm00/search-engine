@@ -8,6 +8,10 @@ import './app.scss';
 export default function App() {
   const [currSearch, setCurrSearch] = useState(data[0]);
 
+  const updateSearch = (i) => {
+    setCurrSearch(data[i]);
+  };
+
   return (
     <div className="app">
       <div className="app__corner -topRight">
@@ -16,12 +20,15 @@ export default function App() {
       <div className="app__dashboard">
         <SearchBar searchData={currSearch || {}} />
         <div className="app__dashboard__buttons">
-          <SearchButton></SearchButton>
-          <SearchButton></SearchButton>
-          <SearchButton></SearchButton>
-          <SearchButton></SearchButton>
-          <SearchButton></SearchButton>
-          <SearchButton></SearchButton>
+          {data.map((dataItem, index) => (
+            <SearchButton
+              key={index}
+              index={index}
+              name={dataItem.name}
+              path={dataItem.path}
+              color={dataItem.color}
+              updateSearch={updateSearch} />
+          ))}
         </div>
       </div>
     </div>
