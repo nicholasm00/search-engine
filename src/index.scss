@@ -1,41 +1,18 @@
+@import "./styles.scss";
+
 html {
   transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  background-color: #eeeeee;
+  background-color: $light-background;
 
   &.-dark {
-    background-color: #1d1d1d;
+    background-color: $dark-background;
 
-    span {
+    span, input {
       color: white;
     }
 
-    label {
-      color: #ffffffbd;
-    }
-
-    path {
+    path, label {
       color: #cfcfcf;
-    }
-
-    .MuiSwitch-track {
-      background-color: #d3d3d3 !important;
-    }
-
-    .MuiIconButton-root:hover,
-    .MuiListItem-button:hover {
-      background-color: #ffffff0a;
-    }
-
-    .MuiInputBase-root {
-      background-color: black;
-    }
-
-    fieldset {
-      border-color: #ffffff3b;
-    }
-
-    input {
-      color: white;
     }
   }
 }
