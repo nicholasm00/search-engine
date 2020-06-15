@@ -5,6 +5,7 @@ export const data = [
     prefix: 'https://www.google.com/search?q=',
     suffix: '',
     color: "blue",
+    id: 90,
   },
   {
     name: 'Google Images',
@@ -12,6 +13,7 @@ export const data = [
     prefix: 'https://www.google.com/search?q=',
     suffix: '&tbm=isch',
     color: "lightBlue",
+    id: 12,
   },
   {
     name: 'YouTube',
@@ -19,6 +21,7 @@ export const data = [
     prefix: 'https://www.youtube.com/results?search_query=',
     suffix: '',
     color: "red",
+    id: 2,
   },
   {
     name: 'Amazon',
@@ -26,6 +29,7 @@ export const data = [
     prefix: 'https://www.amazon.com/s?k=',
     suffix: '',
     color: "yellow",
+    id: 3,
   },
   {
     name: 'Spotify',
@@ -33,6 +37,7 @@ export const data = [
     prefix: 'https://open.spotify.com/search/',
     suffix: '',
     color: "green",
+    id: 4,
   },
   {
     name: 'Wikipedia',
@@ -40,5 +45,6 @@ export const data = [
     prefix: 'https://en.wikipedia.org/w/index.php?&search=',
     suffix: '',
     color: 'black',
+    id: 5,
   },
 ];

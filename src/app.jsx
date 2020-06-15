@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Settings from './components/settings/Settings';
 import SearchBar from './components/searchbar/SearchBar';
 import SearchButton from './components/searchbutton/SearchButton';
@@ -7,10 +7,20 @@ import './app.scss';
 
 export default function App() {
   const [currSearch, setCurrSearch] = useState(data[0]);
+  const [dashboard, setDashboard] = useState([]);
 
-  const updateSearch = (i) => {
-    setCurrSearch(data[i]);
+  useEffect(() => {
+    setDashboard(data);
+  }, []);
+
+  const updateSearch = (id) => {
+    const found = data.find(item => item.id === id);
+    setCurrSearch(found);
   };
+
+  const deleteItem = (id) => {
+    setDashboard(prev => prev.filter((item) => item.id !== id));
+  }
 
   return (
     <div className="app">
@@ -20,14 +30,15 @@ export default function App() {
       <div className="app__dashboard">
         <SearchBar searchData={currSearch || {}} />
         <div className="app__dashboard__buttons">
-          {data.map((dataItem, index) => (
+          {dashboard.map((dataItem) => (
             <SearchButton
-              key={index}
-              index={index}
+              key={dataItem.id}
+              id={dataItem.id}
               name={dataItem.name}
               path={dataItem.path}
               color={dataItem.color}
-              updateSearch={updateSearch} />
+              updateSearch={updateSearch}
+              deleteItem={deleteItem} />
           ))}
         </div>
       </div>
