@@ -11,13 +11,16 @@
 }
 
 .-dark {
-  .settings {
-    &__icon {
-      color: #a1a1a1;
-    }
-  }
-
   .settingsCard {
     background-color: #393939;
+  }
+
+  .MuiSwitch-track {
+    background-color: #d3d3d3 !important;
+  }
+
+  .MuiIconButton-root:hover,
+  .MuiListItem-button:hover {
+    background-color: #ffffff0a;
   }
 }

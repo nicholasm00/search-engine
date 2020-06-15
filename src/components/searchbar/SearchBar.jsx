@@ -22,6 +22,7 @@ const SearchIcon = ({ onClick }) => {
 
 export default function SearchBar({ searchData }) {
   const [value, setValue] = useState('');
+  const [focus, setFocus] = useState(false);
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -34,18 +35,33 @@ export default function SearchBar({ searchData }) {
     window.location.href = newUrl;
   };
 
+  const onFocus = () => {
+    setFocus(true);
+  };
+
+  const onBlur = () => {
+    setFocus(false);
+  };
+
+  const getClasses = () => {
+    let classes = ['searchbar'];
+    if (focus) {
+      classes.push('-focus');
+    }
+    return classes.join(' ');
+  };
+
   return (
-    <form onSubmit={onSearch}>
+    <form className="searchbar" onSubmit={onSearch}>
       <TextField
-        className="searchBar"
+        className="searchbar__input"
         value={value}
         onChange={onChange}
         label={'Search ' + searchData.name}
+        onFocus={onFocus}
+        onBlur={onBlur}
         variant="outlined"
-        color="primary"
-        InputProps={{
-          endAdornment: <SearchIcon onClick={onSearch} />,
-        }}
+        InputProps={{ endAdornment: <SearchIcon onClick={onSearch} /> }}
       />
     </form>
   );
