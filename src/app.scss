@@ -14,11 +14,10 @@
 
   &__dashboard {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, 0);
     width: 600px;
-    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
