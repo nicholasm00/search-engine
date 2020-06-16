@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './SearchButton.scss';
+import { Draggable } from 'react-beautiful-dnd';
 
 const ModalCard = ({
   deleteItem,
@@ -81,6 +82,7 @@ export default function SearchButton({
   editItem,
   currSearchId,
   isDefault,
+  index
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newName, setNewName] = useState(name);
@@ -125,23 +127,31 @@ export default function SearchButton({
   };
 
   return (
-    <button className={getClasses()} onClick={updateSearchFunc}>
-      <div className="searchButton__icon"></div>
-      <span className="searchButton__label">{name}</span>
-      <IconButton className="searchButton__more" onClick={handleModalOpen}>
-        <MoreVertIcon className="searchButton__more__icon" />
-      </IconButton>
-      <ModalContainer open={modalOpen} handleClose={handleModalClose}>
-        <ModalCard
-          deleteItem={deleteItemFunc}
-          name={name}
-          handleClose={handleModalClose}
-          editItem={editItemFunc}
-          onChangeName={onChangeName}
-          isDefault={isDefault}
-          onChangeDefault={onChangeDefault}
-        />
-      </ModalContainer>
-    </button>
+    <Draggable draggableId={id} index={index}>
+      {provided => (
+        <button className={getClasses()} onClick={updateSearchFunc}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}>
+          <div className="searchButton__icon"></div>
+          <span className="searchButton__label">{name}</span>
+          <IconButton className="searchButton__more" onClick={handleModalOpen}>
+            <MoreVertIcon className="searchButton__more__icon" />
+          </IconButton>
+          <ModalContainer open={modalOpen} handleClose={handleModalClose}>
+            <ModalCard
+              deleteItem={deleteItemFunc}
+              name={name}
+              handleClose={handleModalClose}
+              editItem={editItemFunc}
+              onChangeName={onChangeName}
+              isDefault={isDefault}
+              onChangeDefault={onChangeDefault}
+            />
+          </ModalContainer>
+        </button>
+      )}
+    </Draggable>
   );
+
 }

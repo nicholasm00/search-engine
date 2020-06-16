@@ -5,6 +5,7 @@ import SearchButton from './components/searchbutton/SearchButton';
 import SearchButtonAdd from './components/searchbutton/SearchButtonAdd';
 import { data } from './data';
 import './app.scss';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const MAX_DASHBOARD_LENGTH = 10;
 
@@ -18,6 +19,14 @@ const deepCopy = (input) => {
     output[key] = deepCopy(value);
   }
   return output;
+};
+
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
 };
 
 export default function App() {
@@ -53,33 +62,61 @@ export default function App() {
     );
   };
 
+  function onDragEnd(result) {
+    if (!result.destination) {
+      return;
+    }
+
+    if (result.destination.index === result.source.index) {
+      return;
+    }
+
+    const searchButtons = reorder(
+      dashboard,
+      result.source.index,
+      result.destination.index
+    );
+
+    setDashboard(searchButtons);
+  }
+
   return (
     <div className="app">
       <div className="app__corner -topRight">
         <Settings />
       </div>
-      <div className="app__dashboard">
-        <SearchBar searchData={currSearch || {}} />
-        <div className="app__dashboard__buttons">
-          {dashboard.map((item) => (
-            <SearchButton
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              path={item.path}
-              color={item.color}
-              updateSearch={updateSearch}
-              deleteItem={deleteItem}
-              editItem={editItem}
-              currSearchId={currSearch.id}
-              isDefault={defaultId === item.id}
-            />
-          ))}
-          {dashboard.length < MAX_DASHBOARD_LENGTH && (
-            <SearchButtonAdd addItem={addItem} data={data} />
-          )}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="app__dashboard">
+          <SearchBar searchData={currSearch || {}} />
+          <Droppable droppableId="list">
+            {provided => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <div className="app__dashboard__buttons">
+                  {dashboard.map((item, index) => (
+                    <SearchButton
+                      key={item.id}
+                      id={item.id}
+                      name={item.name}
+                      path={item.path}
+                      color={item.color}
+                      updateSearch={updateSearch}
+                      deleteItem={deleteItem}
+                      editItem={editItem}
+                      currSearchId={currSearch.id}
+                      isDefault={defaultId === item.id}
+                      index={index}
+                    />
+                  ))}
+                  {dashboard.length < MAX_DASHBOARD_LENGTH && (
+                    <SearchButtonAdd addItem={addItem} data={data} />
+                  )}
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
-      </div>
+      </DragDropContext>
     </div>
   );
 }
