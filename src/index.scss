@@ -7,12 +7,20 @@ html {
   &.-dark {
     background-color: $dark-background;
 
-    span, input {
+    span, input, div {
       color: white;
     }
 
     path, label {
       color: #cfcfcf;
+    }
+
+    .MuiCard-root {
+      background-color: #393939;
+    }
+
+    .MuiMenu-list {
+      background-color: #505050;
     }
   }
 }
