@@ -12,6 +12,7 @@
   cursor: pointer;
   margin: 5px;
   transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border: transparent 1px solid;
  
   &__icon {
     margin: 20px 0 15px 0;
@@ -66,6 +67,18 @@
   &.-curr {
     .searchButton__icon {
       border: black 1px solid;
+    }
+  }
+
+  &.-dragOver {
+    border: lightskyblue 1px solid;
+  }
+
+  &.-dragStart {
+    background-color: transparent;
+
+    .searchButton__container {
+      display: none;
     }
   }
 }

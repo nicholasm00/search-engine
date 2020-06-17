@@ -81,6 +81,12 @@ export default function SearchButton({
   editItem,
   currSearchId,
   isDefault,
+  index,
+  dragStartIndex,
+  dragOverIndex,
+  onDragStart,
+  onDragOver,
+  onDragEnd,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newName, setNewName] = useState(name);
@@ -116,32 +122,61 @@ export default function SearchButton({
     setNewDefault(e.target.checked);
   };
 
+  const onDragOverFunc = (e) => {
+    e.preventDefault();
+    onDragOver(index);
+  };
+
+  const onDragStartFunc = () => {
+    onDragStart(index);
+  };
+
+  const onDragEndFunc = () => {
+    onDragEnd(index);
+  };
+
   const getClasses = () => {
     let classes = ['searchButton'];
     if (currSearchId === id) {
       classes.push('-curr');
     }
+    if (dragOverIndex !== -1) {
+      if (dragStartIndex === index) {
+        classes.push('-dragStart');
+      } else if (dragOverIndex === index) {
+        classes.push('-dragOver');
+      }
+    }
     return classes.join(' ');
   };
 
   return (
-    <button className={getClasses()} onClick={updateSearchFunc}>
-      <div className="searchButton__icon"></div>
-      <span className="searchButton__label">{name}</span>
-      <IconButton className="searchButton__more" onClick={handleModalOpen}>
-        <MoreVertIcon className="searchButton__more__icon" />
-      </IconButton>
-      <ModalContainer open={modalOpen} handleClose={handleModalClose}>
-        <ModalCard
-          deleteItem={deleteItemFunc}
-          name={name}
-          handleClose={handleModalClose}
-          editItem={editItemFunc}
-          onChangeName={onChangeName}
-          isDefault={isDefault}
-          onChangeDefault={onChangeDefault}
-        />
-      </ModalContainer>
+    <button
+      className={getClasses()}
+      onClick={updateSearchFunc}
+      draggable={true}
+      onDragOver={onDragOverFunc}
+      onDragStart={onDragStartFunc}
+      onDragEnd={onDragEndFunc}
+    >
+      <div className="searchButton__container">
+        <div className="searchButton__icon"></div>
+        <span className="searchButton__label">{name}</span>
+        <IconButton className="searchButton__more" onClick={handleModalOpen}>
+          <MoreVertIcon className="searchButton__more__icon" />
+        </IconButton>
+        <ModalContainer open={modalOpen} handleClose={handleModalClose}>
+          <ModalCard
+            deleteItem={deleteItemFunc}
+            name={name}
+            handleClose={handleModalClose}
+            editItem={editItemFunc}
+            onChangeName={onChangeName}
+            isDefault={isDefault}
+            onChangeDefault={onChangeDefault}
+          />
+        </ModalContainer>
+      </div>
     </button>
   );
 }

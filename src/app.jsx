@@ -24,6 +24,8 @@ export default function App() {
   const [currSearch, setCurrSearch] = useState(data[0]);
   const [dashboard, setDashboard] = useState(deepCopy(data));
   const [defaultId, setDefaultId] = useState(0);
+  const [dragStartIndex, setDragStartIndex] = useState(-1);
+  const [dragOverIndex, setDragOverIndex] = useState(-1);
 
   const updateSearch = (id) => {
     const found = dashboard.find((item) => item.id === id);
@@ -53,6 +55,26 @@ export default function App() {
     );
   };
 
+  const onDragStart = (index) => {
+    setDragStartIndex(index);
+  };
+
+  const onDragOver = (index) => {
+    setDragOverIndex(index);
+  };
+
+  const onDragEnd = () => {
+    if (dragStartIndex !== dragOverIndex && dragOverIndex !== -1) {
+      setDashboard((prev) => {
+        let [removed] = prev.splice(dragStartIndex, 1);
+        prev.splice(dragOverIndex, 0, removed);
+        return prev;
+      });
+    }
+    setDragStartIndex(-1);
+    setDragOverIndex(-1);
+  };
+
   return (
     <div className="app">
       <div className="app__corner -topRight">
@@ -61,7 +83,7 @@ export default function App() {
       <div className="app__dashboard">
         <SearchBar searchData={currSearch || {}} />
         <div className="app__dashboard__buttons">
-          {dashboard.map((item) => (
+          {dashboard.map((item, index) => (
             <SearchButton
               key={item.id}
               id={item.id}
@@ -73,6 +95,12 @@ export default function App() {
               editItem={editItem}
               currSearchId={currSearch.id}
               isDefault={defaultId === item.id}
+              index={index}
+              dragStartIndex={dragStartIndex}
+              dragOverIndex={dragOverIndex}
+              onDragStart={onDragStart}
+              onDragOver={onDragOver}
+              onDragEnd={onDragEnd}
             />
           ))}
           {dashboard.length < MAX_DASHBOARD_LENGTH && (
