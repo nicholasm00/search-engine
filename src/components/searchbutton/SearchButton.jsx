@@ -81,6 +81,7 @@ export default function SearchButton({
   editItem,
   currSearchId,
   isDefault,
+  color,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newName, setNewName] = useState(name);
@@ -126,7 +127,9 @@ export default function SearchButton({
 
   return (
     <button className={getClasses()} onClick={updateSearchFunc}>
-      <div className="searchButton__icon"></div>
+      <div style={{ backgroundColor: (currSearchId === id ? color : null) }} className="searchButton__iconContainer" >
+        <div className="searchButton__icon" />
+      </div>
       <span className="searchButton__label">{name}</span>
       <IconButton className="searchButton__more" onClick={handleModalOpen}>
         <MoreVertIcon className="searchButton__more__icon" />
