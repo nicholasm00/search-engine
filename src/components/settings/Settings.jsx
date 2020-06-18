@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import { Brightness4 } from '@material-ui/icons';
 import SettingsIcon from '@material-ui/icons/Settings';
+import { darkMode, setDarkMode } from '../../storage';
 import './Settings.scss';
 
 const items = [
@@ -21,15 +22,9 @@ const items = [
 ];
 
 const SettingsItemDarkMode = () => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(darkMode);
 
   const rootElement = document.documentElement;
-
-  useEffect(() => {
-    let isDark = false;
-    // check chrome storage sync
-    setChecked(isDark);
-  }, []);
 
   useEffect(() => {
     if (checked) {
@@ -40,6 +35,7 @@ const SettingsItemDarkMode = () => {
   }, [checked]);
 
   const onChange = (event, value) => {
+    setDarkMode(value)
     setChecked(value);
   };
 

@@ -101,6 +101,18 @@
       animation: border 0.3s ease 1 forwards;
     }
   }
+
+  &.-dragOver {
+    border: lightskyblue 1px solid;
+  }
+
+  &.-dragStart {
+    background-color: transparent;
+
+    .searchButton__container {
+      display: none;
+    }
+  }
 }
 
 .modalCard {
