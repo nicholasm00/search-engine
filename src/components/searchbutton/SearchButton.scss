@@ -113,6 +113,18 @@
       display: none;
     }
   }
+
+  &.-dragOver {
+    border: lightskyblue 1px solid;
+  }
+
+  &.-dragStart {
+    background-color: transparent;
+
+    .searchButton__container {
+      display: none;
+    }
+  }
 }
 
 .modalCard {
