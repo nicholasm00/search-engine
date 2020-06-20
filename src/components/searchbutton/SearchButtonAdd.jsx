@@ -72,18 +72,22 @@ export default function SearchButtonAdd({ addItem, data }) {
 
   return (
     <button className="searchButton" onClick={handleModalOpen}>
-      <div className="searchButton__icon">
-        <AddIcon className="searchButton__icon__add" />
+      <div className="searchButton__container">
+        <div className="searchButton__iconContainer">
+          <div className="searchButton__icon">
+            <AddIcon className="searchButton__icon__add" />
+          </div>
+        </div>
+        <span className="searchButton__label">Add Search</span>
+        <ModalContainer open={modalOpen} handleClose={handleModalClose}>
+          <ModalCard
+            addItem={addItemFunc}
+            onChangeSite={onChangeSite}
+            handleClose={handleModalClose}
+            data={data}
+          />
+        </ModalContainer>
       </div>
-      <span className="searchButton__label">Add Search</span>
-      <ModalContainer open={modalOpen} handleClose={handleModalClose}>
-        <ModalCard
-          addItem={addItemFunc}
-          onChangeSite={onChangeSite}
-          handleClose={handleModalClose}
-          data={data}
-        />
-      </ModalContainer>
     </button>
   );
 }

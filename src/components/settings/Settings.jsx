@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Tooltip,
   IconButton,
@@ -13,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { Brightness4 } from '@material-ui/icons';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { darkMode, setDarkMode } from '../../storage';
 import './Settings.scss';
 
 const items = [
@@ -21,22 +20,9 @@ const items = [
   { name: 'Feedback', button: true },
 ];
 
-const SettingsItemDarkMode = () => {
-  const [checked, setChecked] = useState(darkMode);
-
-  const rootElement = document.documentElement;
-
-  useEffect(() => {
-    if (checked) {
-      rootElement.classList.add('-dark');
-    } else {
-      rootElement.classList.remove('-dark');
-    }
-  }, [checked]);
-
+const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
   const onChange = (event, value) => {
-    setDarkMode(value)
-    setChecked(value);
+    updateDarkMode(value);
   };
 
   return (
@@ -46,7 +32,7 @@ const SettingsItemDarkMode = () => {
       </ListItemIcon>
       <ListItemText primary="Dark Mode" />
       <ListItemSecondaryAction>
-        <Switch onChange={onChange} checked={checked} color="primary" />
+        <Switch onChange={onChange} checked={darkMode} color="primary" />
       </ListItemSecondaryAction>
     </ListItem>
   );
@@ -60,12 +46,15 @@ const SettingsItem = ({ name }) => {
   );
 };
 
-const SettingsCard = ({ onClickAway }) => {
+const SettingsCard = ({ onClickAway, darkMode, updateDarkMode }) => {
   return (
     <ClickAwayListener onClickAway={onClickAway}>
       <Card className="settingsCard">
         <List>
-          <SettingsItemDarkMode />
+          <SettingsItemDarkMode
+            darkMode={darkMode}
+            updateDarkMode={updateDarkMode}
+          />
           {items.map((i) => (
             <SettingsItem
               key={i.name}
@@ -81,7 +70,7 @@ const SettingsCard = ({ onClickAway }) => {
   );
 };
 
-export default function Settings() {
+export default function Settings({ darkMode, updateDarkMode }) {
   const [open, setOpen] = useState(false);
 
   const onClick = () => {
@@ -95,7 +84,13 @@ export default function Settings() {
   return (
     <Tooltip
       className="settings"
-      title={<SettingsCard onClickAway={onClickAway} />}
+      title={
+        <SettingsCard
+          onClickAway={onClickAway}
+          darkMode={darkMode}
+          updateDarkMode={updateDarkMode}
+        />
+      }
       open={open}
       placement="bottom-end"
       interactive
