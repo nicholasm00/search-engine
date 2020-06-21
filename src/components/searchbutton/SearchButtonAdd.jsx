@@ -27,12 +27,21 @@ const ModalCard = ({ addItem, handleClose, onChangeSite, data }) => {
           ))}
         </Select>
       </FormControl>
-      <FormControlLabel label="Make Default" control={<Checkbox />} />
-      <div>
+      <div className="modalCard__checkbox">
+        <FormControlLabel
+          label="Make Default"
+          control={<Checkbox color="default" />}
+        />
+      </div>
+      <div className="modalCard__row">
         <Button onClick={handleClose} variant="outlined">
           Cancel
         </Button>
-        <Button onClick={addItem} variant="contained">
+        <Button
+          onClick={addItem}
+          variant="contained"
+          className="modalCard__button -primary"
+        >
           Add
         </Button>
       </div>

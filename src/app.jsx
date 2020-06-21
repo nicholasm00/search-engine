@@ -90,7 +90,7 @@ export default function App() {
     updateDashboard(newDash);
   };
 
-  const editItem = (id, name, isDefault) => {
+  const editItem = (id, name, isDefault, color) => {
     if (isDefault) {
       updateDefaultId(id);
     }
@@ -98,6 +98,7 @@ export default function App() {
       let newItem = item;
       if (item.id === id) {
         newItem.name = name;
+        newItem.color = color;
       }
       return newItem;
     });

@@ -9,9 +9,65 @@ import {
   TextField,
   Checkbox,
   FormControlLabel,
+  Tooltip,
+  ClickAwayListener,
 } from '@material-ui/core';
+import ColorLensIcon from '@material-ui/icons/ColorLens';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { BlockPicker } from 'react-color';
 import './SearchButton.scss';
+
+const ColorPicker = ({ color, onChangeColor }) => {
+  const [open, setOpen] = useState(false);
+
+  const colorArr = [
+    '#FF6900',
+    '#FCB900',
+    '#7BDCB5',
+    '#00D084',
+    '#8ED1FC',
+    '#0693E3',
+    '#ABB8C3',
+    '#EB144C',
+    '#F78DA7',
+    '#9900EF',
+  ];
+
+  const onClickAway = () => {
+    setOpen(false);
+  };
+
+  const onClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const onChangeComplete = (col) => {
+    onChangeColor(col.hex);
+  };
+
+  return (
+    <Tooltip
+      open={open}
+      title={
+        <ClickAwayListener onClickAway={onClickAway}>
+          <div className="colorPickerModal">
+            <BlockPicker
+              color={color}
+              colors={colorArr}
+              onChangeComplete={onChangeComplete}
+            />
+          </div>
+        </ClickAwayListener>
+      }
+      interactive
+      placement="bottom"
+    >
+      <IconButton onClick={onClick} style={{ backgroundColor: color }}>
+        <ColorLensIcon />
+      </IconButton>
+    </Tooltip>
+  );
+};
 
 const ModalCard = ({
   deleteItem,
@@ -21,37 +77,52 @@ const ModalCard = ({
   onChangeName,
   isDefault,
   onChangeDefault,
+  color,
+  onChangeColor,
 }) => {
   return (
     <Card className="modalCard">
       <div>{`Edit '${name}'`}</div>
-      <TextField
-        onChange={onChangeName}
-        className="modalCard__input"
-        defaultValue={name}
-        label="Name"
-        variant="filled"
-      />
-      <FormControlLabel
-        label="Make Default"
-        control={
-          <Checkbox
-            color="default"
-            onChange={onChangeDefault}
-            defaultChecked={isDefault}
-          />
-        }
-      />
-      <div>
-        <Button onClick={deleteItem} variant="outlined">
-          Delete
-        </Button>
-        <Button onClick={handleClose} variant="outlined">
-          Cancel
-        </Button>
-        <Button onClick={editItem} variant="contained">
-          Save
-        </Button>
+      <div className="modalCard__row">
+        <TextField
+          onChange={onChangeName}
+          className="modalCard__input"
+          defaultValue={name}
+          label="Name"
+          variant="filled"
+        />
+        <ColorPicker color={color} onChangeColor={onChangeColor} />
+      </div>
+      <div className="modalCard__checkbox">
+        <FormControlLabel
+          label="Make Default"
+          control={
+            <Checkbox
+              color="default"
+              onChange={onChangeDefault}
+              defaultChecked={isDefault}
+            />
+          }
+        />
+      </div>
+      <div className="modalCard__row">
+        <div className="modalCard__buttons">
+          <Button onClick={deleteItem} variant="outlined">
+            Delete
+          </Button>
+        </div>
+        <div className="modalCard__buttons">
+          <Button onClick={handleClose} variant="outlined">
+            Cancel
+          </Button>
+          <Button
+            className="modalCard__button -primary"
+            onClick={editItem}
+            variant="contained"
+          >
+            Save
+          </Button>
+        </div>
       </div>
     </Card>
   );
@@ -92,6 +163,7 @@ export default function SearchButton({
   const [modalOpen, setModalOpen] = useState(false);
   const [newName, setNewName] = useState(name);
   const [newDefault, setNewDefault] = useState(isDefault);
+  const [newColor, setNewColor] = useState(color);
 
   const updateSearchFunc = () => {
     updateSearch(id);
@@ -103,7 +175,7 @@ export default function SearchButton({
 
   const editItemFunc = () => {
     if (newName === '') return;
-    editItem(id, newName, newDefault);
+    editItem(id, newName, newDefault, newColor);
     setModalOpen(false);
   };
 
@@ -113,6 +185,9 @@ export default function SearchButton({
 
   const handleModalClose = () => {
     setModalOpen(false);
+    setNewName(name);
+    setNewDefault(isDefault);
+    setNewColor(color);
   };
 
   const onChangeName = (e) => {
@@ -121,6 +196,10 @@ export default function SearchButton({
 
   const onChangeDefault = (e) => {
     setNewDefault(e.target.checked);
+  };
+
+  const onChangeColor = (col) => {
+    setNewColor(col);
   };
 
   const onDragOverFunc = (e) => {
@@ -161,7 +240,10 @@ export default function SearchButton({
       onDragEnd={onDragEndFunc}
     >
       <div className="searchButton__container">
-        <div style={{ backgroundColor: (currSearchId === id ? color : null) }} className="searchButton__iconContainer" >
+        <div
+          style={{ backgroundColor: currSearchId === id ? color : null }}
+          className="searchButton__iconContainer"
+        >
           <div className="searchButton__icon" />
         </div>
         <span className="searchButton__label">{name}</span>
@@ -177,6 +259,8 @@ export default function SearchButton({
             onChangeName={onChangeName}
             isDefault={isDefault}
             onChangeDefault={onChangeDefault}
+            color={newColor}
+            onChangeColor={onChangeColor}
           />
         </ModalContainer>
       </div>

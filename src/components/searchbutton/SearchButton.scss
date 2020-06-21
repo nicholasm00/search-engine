@@ -46,19 +46,24 @@
 
   @keyframes border {
     0% {
-      box-shadow: 30px -30px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 30px -30px 0 1px white, -30px -30px 0 1px white,
+        -30px 30px 0 1px white, 30px 30px 0 1px white;
     }
     25% {
-      box-shadow: 0 -70px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -30px -30px 0 1px white,
+        -30px 30px 0 1px white, 30px 30px 0 1px white;
     }
     50% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white,
+        -30px 30px 0 1px white, 30px 30px 0 1px white;
     }
     75% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white,
+        0px 70px 0 1px white, 30px 30px 0 1px white;
     }
     100% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 65px 20px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white,
+        0px 70px 0 1px white, 65px 20px 0 1px white;
     }
   }
 
@@ -133,7 +138,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
+  width: 320px;
   height: 200px;
   padding: 20px;
   display: flex;
@@ -141,6 +146,36 @@
   justify-content: space-between;
 
   &__input {
-    width: 100%;
+    width: 80%;
   }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__button {
+    &.-primary {
+      background-color: black;
+      color: white;
+      margin-left: 10px;
+
+      &:hover {
+        background-color: #000000d5;
+      }
+    }
+  }
+
+  &__checkbox {
+    width: 160px;
+  }
+}
+
+.colorPickerModal {
+  margin-top: 20px;
 }
