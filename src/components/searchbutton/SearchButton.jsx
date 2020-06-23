@@ -169,7 +169,8 @@ export default function SearchButton({
     updateSearch(id);
   };
 
-  const deleteItemFunc = () => {
+  const deleteItemFunc = (e) => {
+    e.stopPropagation();
     deleteItem(id);
   };
 
@@ -179,11 +180,13 @@ export default function SearchButton({
     setModalOpen(false);
   };
 
-  const handleModalOpen = () => {
+  const handleModalOpen = (e) => {
+    e.stopPropagation();
     setModalOpen(true);
   };
 
-  const handleModalClose = () => {
+  const handleModalClose = (e) => {
+    e.stopPropagation();
     setModalOpen(false);
     setNewName(name);
     setNewDefault(isDefault);
