@@ -46,24 +46,19 @@
 
   @keyframes border {
     0% {
-      box-shadow: 30px -30px 0 1px white, -30px -30px 0 1px white,
-        -30px 30px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 30px -30px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
     }
     25% {
-      box-shadow: 0 -70px 0 1px white, -30px -30px 0 1px white,
-        -30px 30px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
     }
     50% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white,
-        -30px 30px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
     }
     75% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white,
-        0px 70px 0 1px white, 30px 30px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 30px 30px 0 1px white;
     }
     100% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white,
-        0px 70px 0 1px white, 65px 20px 0 1px white;
+      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 65px 20px 0 1px white;
     }
   }
 
@@ -103,9 +98,38 @@
   }
 
   &.-curr {
-    .searchButton__icon {
-      animation: border 0.3s ease 1 forwards;
+    color: white;
+
+    .searchButton__more__icon {
+      color: white;
     }
+
+    .searchButton__more {
+      :hover {
+        background-color: gray;
+        border-radius: 50%;
+      }
+    }
+
+    &:before {
+      .searchButton__icon {
+        animation: border 0.3s ease 1 forwards;
+      }
+      top: 0;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    background-color: #606060;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+    border-radius: 7px;
+    -webkit-transition: top 0.2s ease-in;
   }
 
   &.-dragOver {
