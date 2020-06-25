@@ -243,12 +243,7 @@ export default function SearchButton({
       onDragEnd={onDragEndFunc}
     >
       <div className="searchButton__container">
-        <div
-          style={{ backgroundColor: currSearchId === id ? color : null }}
-          className="searchButton__iconContainer"
-        >
           <div className="searchButton__icon" />
-        </div>
         <span className="searchButton__label">{name}</span>
         <IconButton className="searchButton__more" onClick={handleModalOpen}>
           <MoreVertIcon className="searchButton__more__icon" />

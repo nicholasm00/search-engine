@@ -1,14 +1,11 @@
 .searchbar {
   width: 500px;
+  border-radius: 8px;
 
   &__input {
     width: 100%;
     background-color: transparent !important;
   }
-
-  border: 4px solid;
-  border-radius: 8px;
-  transition: border-color 0.3s;
 }
 
 .searchIcon {

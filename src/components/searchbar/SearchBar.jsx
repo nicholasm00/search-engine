@@ -52,8 +52,7 @@ export default function SearchBar({ searchData }) {
   };
 
   return (
-    <form className="searchbar" onSubmit={onSearch}
-      style={{ borderColor: searchData.color }}>
+    <form className="searchbar" onSubmit={onSearch}>
       <TextField
         className="searchbar__input"
         value={value}
