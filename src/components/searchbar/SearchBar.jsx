@@ -30,7 +30,7 @@ export default function SearchBar({ searchData }) {
 
   const onSearch = (event) => {
     event.preventDefault();
-    if (value === '') return;
+    if (value === '' || !searchData.id) return;
     const newUrl = searchData.prefix + formatSearch(value) + searchData.suffix;
     window.location.href = newUrl;
   };
@@ -57,7 +57,7 @@ export default function SearchBar({ searchData }) {
         className="searchbar__input"
         value={value}
         onChange={onChange}
-        label={'Search ' + searchData.name}
+        label={searchData.id && 'Search ' + searchData.name}
         onFocus={onFocus}
         onBlur={onBlur}
         variant="outlined"

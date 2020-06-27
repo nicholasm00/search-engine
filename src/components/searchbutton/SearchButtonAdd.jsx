@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
-import { ModalContainer } from './SearchButton';
-import {
-  Card,
-  Button,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Checkbox,
-  FormControlLabel,
-} from '@material-ui/core';
+import { ModalContainer, ColorPicker, DefaultBox } from './SearchButton';
+import { Card, Button, TextField } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import './SearchButton.scss';
 
-const ModalCard = ({ addItem, handleClose, onChangeSite, data }) => {
+const INITIAL_COLOR = '#ffffff';
+
+const ModalCard = ({
+  addItem,
+  handleClose,
+  onChangeSite,
+  data,
+  isDefault,
+  onChangeDefault,
+  color,
+  onChangeColor,
+}) => {
   return (
     <Card className="modalCard">
       <div>Add Search</div>
-      <FormControl variant="filled">
-        <InputLabel>Site</InputLabel>
-        <Select onChange={onChangeSite} className="modalCard__input">
-          {data.map((item, index) => (
-            <MenuItem key={index} value={index}>
-              {item.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <div className="modalCard__checkbox">
-        <FormControlLabel
-          label="Make Default"
-          control={<Checkbox color="default" />}
+      <div className="modalCard__row">
+        <Autocomplete
+          onChange={onChangeSite}
+          className="modalCard__input"
+          options={data}
+          getOptionLabel={(item) => item.name}
+          renderInput={(params) => (
+            <TextField {...params} label="Site" variant="outlined" />
+          )}
         />
+        <ColorPicker color={color} onChangeColor={onChangeColor} />
       </div>
+      <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modalCard__row">
         <Button onClick={handleClose} variant="outlined">
           Cancel
@@ -55,13 +55,24 @@ const randId = () => {
 
 export default function SearchButtonAdd({ addItem, data }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [siteIndex, setSiteIndex] = useState(-1);
+  const [site, setSite] = useState(null);
+  const [newDefault, setNewDefault] = useState(false);
+  const [newColor, setNewColor] = useState(INITIAL_COLOR);
+
+  const onChangeDefault = (e, v) => {
+    setNewDefault(e.target.checked);
+  };
+
+  const onChangeColor = (col) => {
+    setNewColor(col);
+  };
 
   const addItemFunc = (e) => {
-    if (siteIndex === -1 || !modalOpen) return;
-    let newItem = { ...data[siteIndex] };
+    if (site === null || !modalOpen) return;
+    let newItem = { ...site };
     newItem.id = randId();
-    addItem(newItem);
+    newItem.color = newColor;
+    addItem(newItem, newDefault);
     handleModalClose(e);
   };
 
@@ -73,10 +84,18 @@ export default function SearchButtonAdd({ addItem, data }) {
   const handleModalClose = (e) => {
     e.stopPropagation();
     setModalOpen(false);
+    setSite(null);
+    setNewDefault(false);
+    setNewColor(INITIAL_COLOR);
   };
 
-  const onChangeSite = (e) => {
-    setSiteIndex(e.target.value);
+  const onChangeSite = (e, value) => {
+    setSite(value);
+    if (!value) {
+      setNewColor(INITIAL_COLOR);
+    } else {
+      setNewColor(value.color);
+    }
   };
 
   return (
@@ -94,6 +113,10 @@ export default function SearchButtonAdd({ addItem, data }) {
             onChangeSite={onChangeSite}
             handleClose={handleModalClose}
             data={data}
+            isDefault={newDefault}
+            onChangeDefault={onChangeDefault}
+            color={newColor}
+            onChangeColor={onChangeColor}
           />
         </ModalContainer>
       </div>

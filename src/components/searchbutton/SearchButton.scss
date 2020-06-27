@@ -154,6 +154,10 @@
     align-items: center;
   }
 
+  &__header {
+    margin-bottom: 10px;
+  }
+
   &__buttons {
     display: flex;
   }
@@ -177,4 +181,10 @@
 
 .colorPickerModal {
   margin-top: 20px;
+}
+
+.-dark {
+  .MuiPaper-root {
+    background-color: #1d1d1d;
+  }
 }

@@ -6,12 +6,10 @@ import {
   Card,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   ListItemSecondaryAction,
   Switch,
 } from '@material-ui/core';
-import { Brightness4 } from '@material-ui/icons';
 import SettingsIcon from '@material-ui/icons/Settings';
 import './Settings.scss';
 
@@ -27,9 +25,6 @@ const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
 
   return (
     <ListItem>
-      <ListItemIcon>
-        <Brightness4 />
-      </ListItemIcon>
       <ListItemText primary="Dark Mode" />
       <ListItemSecondaryAction>
         <Switch onChange={onChange} checked={darkMode} color="primary" />

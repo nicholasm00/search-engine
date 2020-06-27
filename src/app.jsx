@@ -26,7 +26,7 @@ export default function App() {
   const [dashboard, setDashboard] = useState(null);
   const [defaultId, setDefaultId] = useState(null);
   const [darkMode, setDarkMode] = useState(null);
-  const [currSearch, setCurrSearch] = useState(null);
+  const [currSearch, setCurrSearch] = useState({});
   const [loading, setLoading] = useState(true);
   const [dragStartIndex, setDragStartIndex] = useState(-1);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
@@ -83,9 +83,15 @@ export default function App() {
   const deleteItem = (id) => {
     let newDash = dashboard.filter((item) => item.id !== id);
     updateDashboard(newDash);
+    if (id === currSearch.id) {
+      setCurrSearch({});
+    }
   };
 
-  const addItem = (item) => {
+  const addItem = (item, isDefault) => {
+    if (isDefault) {
+      updateDefaultId(item.id);
+    }
     let newDash = dashboard.concat(item);
     updateDashboard(newDash);
   };
@@ -131,7 +137,7 @@ export default function App() {
           <Settings darkMode={darkMode} updateDarkMode={updateDarkMode} />
         </div>
         <div className="app__dashboard">
-          <SearchBar searchData={currSearch || {}} />
+          <SearchBar searchData={currSearch} />
           <div className="app__dashboard__buttons">
             {dashboard.map((item, index) => (
               <SearchButton

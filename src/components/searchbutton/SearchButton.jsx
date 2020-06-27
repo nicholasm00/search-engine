@@ -17,7 +17,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { BlockPicker } from 'react-color';
 import './SearchButton.scss';
 
-const ColorPicker = ({ color, onChangeColor }) => {
+export const ColorPicker = ({ color, onChangeColor }) => {
   const [open, setOpen] = useState(false);
 
   const colorArr = [
@@ -69,6 +69,23 @@ const ColorPicker = ({ color, onChangeColor }) => {
   );
 };
 
+export const DefaultBox = ({ onChangeDefault, isDefault }) => {
+  return (
+    <div className="modalCard__checkbox">
+      <FormControlLabel
+        label="Make Default"
+        control={
+          <Checkbox
+            color="default"
+            onChange={onChangeDefault}
+            defaultChecked={isDefault}
+          />
+        }
+      />
+    </div>
+  );
+};
+
 const ModalCard = ({
   deleteItem,
   name,
@@ -82,29 +99,18 @@ const ModalCard = ({
 }) => {
   return (
     <Card className="modalCard">
-      <div>{`Edit '${name}'`}</div>
+      <div className="modalCard__header">{`Edit '${name}'`}</div>
       <div className="modalCard__row">
         <TextField
           onChange={onChangeName}
           className="modalCard__input"
           defaultValue={name}
           label="Name"
-          variant="filled"
+          variant="outlined"
         />
         <ColorPicker color={color} onChangeColor={onChangeColor} />
       </div>
-      <div className="modalCard__checkbox">
-        <FormControlLabel
-          label="Make Default"
-          control={
-            <Checkbox
-              color="default"
-              onChange={onChangeDefault}
-              defaultChecked={isDefault}
-            />
-          }
-        />
-      </div>
+      <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modalCard__row">
         <div className="modalCard__buttons">
           <Button onClick={deleteItem} variant="outlined">
@@ -243,7 +249,7 @@ export default function SearchButton({
       onDragEnd={onDragEndFunc}
     >
       <div className="searchButton__container">
-          <div className="searchButton__icon" />
+        <div className="searchButton__icon" />
         <span className="searchButton__label">{name}</span>
         <IconButton className="searchButton__more" onClick={handleModalOpen}>
           <MoreVertIcon className="searchButton__more__icon" />
