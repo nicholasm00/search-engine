@@ -159,6 +159,7 @@ export default function SearchButton({
   currSearchId,
   isDefault,
   color,
+  favicon,
   index,
   dragStartIndex,
   dragOverIndex,
@@ -247,9 +248,13 @@ export default function SearchButton({
       onDragOver={onDragOverFunc}
       onDragStart={onDragStartFunc}
       onDragEnd={onDragEndFunc}
+      style={{ backgroundColor: (currSearchId === id ? color : null) }}
+      title={name}
     >
       <div className="searchButton__container">
-        <div className="searchButton__icon" />
+        <div className="searchButton__iconContainer">
+          <img className="searchButton__iconContainer__icon" src={favicon} alt={name[0]} />
+        </div>
         <span className="searchButton__label">{name}</span>
         <IconButton className="searchButton__more" onClick={handleModalOpen}>
           <MoreVertIcon className="searchButton__more__icon" />

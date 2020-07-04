@@ -65,6 +65,10 @@ export default function App() {
     //chrome.storage.sync.set({ 'chrome-storage-dashboard': val });
   };
 
+  const resetDashboard = () => {
+    updateDashboard(deepCopy(data));
+  }
+
   const updateDefaultId = (val) => {
     setDefaultId(val);
     //chrome.storage.sync.set({ 'chrome-storage-default-id': val });
@@ -134,7 +138,7 @@ export default function App() {
     !loading && (
       <div className="app">
         <div className="app__corner -topRight">
-          <Settings darkMode={darkMode} updateDarkMode={updateDarkMode} />
+          <Settings darkMode={darkMode} updateDarkMode={updateDarkMode} resetDashboard={resetDashboard} />
         </div>
         <div className="app__dashboard">
           <SearchBar searchData={currSearch} />
@@ -146,6 +150,7 @@ export default function App() {
                 name={item.name}
                 path={item.path}
                 color={item.color}
+                favicon={item.favicon}
                 updateSearch={updateSearch}
                 deleteItem={deleteItem}
                 editItem={editItem}

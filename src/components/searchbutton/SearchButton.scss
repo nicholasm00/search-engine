@@ -2,12 +2,12 @@
   position: relative;
   height: 120px;
   width: 110px;
-  border-radius: 7px;
+  border-radius: 5px;
   outline: 0;
   border: none;
   cursor: pointer;
   margin-top: 10px;
-  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  //transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   padding: 0;
   background-color: transparent;
 
@@ -20,7 +20,7 @@
     align-items: center;
   }
 
-  &__icon {
+  &__iconContainer {
     background-color: white;
     border-radius: 50%;
     width: 50px;
@@ -30,27 +30,9 @@
     align-items: center;
     margin: 20px 0 18px 0;
 
-    &__add {
+    &__icon {
       width: 30px;
       height: 30px;
-    }
-  }
-
-  @keyframes border {
-    0% {
-      box-shadow: 30px -30px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
-    }
-    25% {
-      box-shadow: 0 -70px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
-    }
-    50% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
-    }
-    75% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 30px 30px 0 1px white;
-    }
-    100% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 65px 20px 0 1px white;
     }
   }
 
@@ -85,23 +67,21 @@
   }
 
   &.-curr {
-    color: white;
-
-    .searchButton__more__icon {
+    .searchButton__label {
       color: white;
     }
-
-    .searchButton__more {
-      :hover {
-        background-color: gray;
-        border-radius: 50%;
-      }
+    .searchButton__more__icon {
+      color: white;
+      border-radius: 50%;
     }
 
+    // .searchButton__more {
+    //   :hover {
+    //     background-color: transparent;
+    //   }
+    // }
+
     &:before {
-      .searchButton__icon {
-        animation: border 0.3s ease 1 forwards;
-      }
       top: 0;
     }
   }
@@ -109,13 +89,13 @@
   &:before {
     content: "";
     position: absolute;
-    background-color: #777777b2;
+    background-color: transparent;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0%;
     top: 100%;
     z-index: -1;
-    border-radius: 7px;
+    border-radius: 5px;
     -webkit-transition: top 0.2s ease;
   }
 
