@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ModalContainer } from '../searchbutton/SearchButton';
 import {
   Tooltip,
   IconButton,
@@ -9,13 +10,11 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Switch,
-  Modal,
-  Backdrop,
-  Fade,
   Button,
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import './Settings.scss';
+import '../searchbutton/SearchButton.scss';
 
 const items = [
   { name: 'Feedback', button: true },
@@ -49,6 +48,11 @@ const SettingsItemReset = ({ resetDashboard }) => {
     setModalOpen(true);
   };
 
+  const handleResetDashboard = () => {
+    setModalOpen(false);
+    resetDashboard();
+  };
+
   return (
     <div>
       <ListItem button onClick={handleModalOpen}>
@@ -56,13 +60,13 @@ const SettingsItemReset = ({ resetDashboard }) => {
       </ListItem>
       <ModalContainer open={modalOpen} handleClose={handleModalClose}>
         <ModalCard
-          resetDashboard={resetDashboard}
+          resetDashboard={handleResetDashboard}
           handleClose={handleModalClose}
         />
       </ModalContainer>
     </div>
   );
-}
+};
 
 const SettingsItem = ({ name }) => {
   return (
@@ -101,15 +105,15 @@ const SettingsCard = ({ onClickAway, darkMode, updateDarkMode, resetDashboard })
 
 const ModalCard = ({ handleClose, resetDashboard }) => {
   return (
-    <Card className="modal">
-      <div className="modal__header">Are you sure?</div>
-      <div className="modal__row">
-        <div className="modal__buttons">
+    <Card className="modalCard -confirmation">
+      <div className="modalCard__header">Are you sure?</div>
+      <div className="modalCard__row">
+        <div className="modalCard__buttons">
           <Button onClick={handleClose} variant="outlined">
             Cancel
           </Button>
           <Button
-            className="modal__button -primary"
+            className="modalCard__button -primary"
             onClick={resetDashboard}
             variant="contained"
           >
@@ -118,22 +122,6 @@ const ModalCard = ({ handleClose, resetDashboard }) => {
         </div>
       </div>
     </Card>
-  );
-};
-
-export const ModalContainer = ({ open, handleClose, children }) => {
-  return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
-    >
-      <Fade in={open}>{children}</Fade>
-    </Modal>
   );
 };
 
