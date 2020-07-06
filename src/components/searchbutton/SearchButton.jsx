@@ -252,8 +252,8 @@ export default function SearchButton({
       title={name}
     >
       <div className="searchButton__container">
-        <div className="searchButton__iconContainer">
-          <img className="searchButton__iconContainer__icon" src={favicon} alt={name[0]} />
+        <div className="searchButton__icon">
+          <img className="searchButton__favicon" src={favicon} alt={name[0]} />
         </div>
         <span className="searchButton__label">{name}</span>
         <IconButton className="searchButton__more" onClick={handleModalOpen}>

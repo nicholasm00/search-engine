@@ -102,7 +102,9 @@ export default function SearchButtonAdd({ addItem, data }) {
     <button className="searchButton" onClick={handleModalOpen}>
       <div className="searchButton__container">
         <div className="searchButton__iconContainer">
-          <AddIcon className="searchButton__iconContainer__icon" />
+          <div className="searchButton__icon">
+            <AddIcon className="searchButton__favicon" />
+          </div>
         </div>
         <span className="searchButton__label">Add Search</span>
         <ModalContainer open={modalOpen} handleClose={handleModalClose}>

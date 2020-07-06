@@ -1,11 +1,13 @@
+const arr = ['Google', 'YouTube', 'Amazon', 'Spotify', 'Wikipedia', 'Google Images'];
+
 export const data = [
   {
     name: 'Google',
     path: 'https://www.google.com/',
     prefix: 'https://www.google.com/search?q=',
     suffix: '',
-    color: "#4285F4",
-    id: 90,
+    color: '#4285F4',
+    id: 100,
     favicon: 'https://www.google.com/favicon.ico',
   },
   {
@@ -13,8 +15,8 @@ export const data = [
     path: 'https://www.google.com/imghp',
     prefix: 'https://www.google.com/search?q=',
     suffix: '&tbm=isch',
-    color: "#F5AF00",
-    id: 12,
+    color: '#F5AF00',
+    id: 101,
     favicon: 'https://www.google.com/favicon.ico',
   },
   {
@@ -23,7 +25,7 @@ export const data = [
     prefix: 'https://www.youtube.com/results?search_query=',
     suffix: '',
     color: '#d71e18',
-    id: 2,
+    id: 102,
     favicon: 'https://s.ytimg.com/yts/img/favicon_144-vfliLAfaB.png',
   },
   {
@@ -31,8 +33,8 @@ export const data = [
     path: 'https://www.amazon.com/',
     prefix: 'https://www.amazon.com/s?k=',
     suffix: '',
-    color: "#EF7A1A",
-    id: 3,
+    color: '#EF7A1A',
+    id: 103,
     favicon: 'https://www.amazon.com/favicon.ico',
   },
   {
@@ -40,8 +42,8 @@ export const data = [
     path: 'https://open.spotify.com/',
     prefix: 'https://open.spotify.com/search/',
     suffix: '',
-    color: "#1DB954",
-    id: 4,
+    color: '#1DB954',
+    id: 104,
     favicon: 'https://www.scdn.co/i/_global/favicon.png',
   },
   {
@@ -50,7 +52,7 @@ export const data = [
     prefix: 'https://en.wikipedia.org/w/index.php?&search=',
     suffix: '',
     color: '#505050',
-    id: 5,
+    id: 105,
     favicon: 'https://en.wikipedia.org/favicon.ico',
   },
   {
@@ -59,8 +61,9 @@ export const data = [
     prefix: 'https://www.reddit.com/search/?q=',
     suffix: '',
     color: '#FF5700',
-    id: 6,
-    favicon: 'https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-120x120.png',
+    id: 106,
+    favicon:
+      'https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-120x120.png',
   },
   {
     name: 'Facebook',
@@ -68,7 +71,7 @@ export const data = [
     prefix: 'https://www.facebook.com/search/top/?q=',
     suffix: '',
     color: '#4267B2',
-    id: 97,
+    id: 107,
     favicon: 'https://facebook.com/favicon.ico',
   },
   {
@@ -77,16 +80,17 @@ export const data = [
     prefix: 'https://search.yahoo.com/search?p=',
     suffix: '',
     color: '#720e9e',
-    id: 98,
+    id: 108,
     favicon: 'https://s.yimg.com/rz/l/favicon.ico',
   },
   {
     name: 'eBay',
     path: 'https://www.ebay.com/',
-    prefix: 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR11.TRC1.A0.H0.Xok.TRS0&_nkw=',
+    prefix:
+      'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR11.TRC1.A0.H0.Xok.TRS0&_nkw=',
     suffix: '',
     color: '#86B817',
-    id: 99,
+    id: 109,
     favicon: 'https://pages.ebay.com/favicon.ico',
   },
   {
@@ -95,7 +99,9 @@ export const data = [
     prefix: 'https://www.pinterest.com/search/pins/?q=',
     suffix: '',
     color: '#c8232c',
-    id: 100,
+    id: 110,
     favicon: 'https://s.pinimg.com/webapp/style/images/favicon-fd1ea058.png',
   },
 ];
+
+export const initDashboard = data.filter((item) => arr.includes(item.name));

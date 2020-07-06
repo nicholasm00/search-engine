@@ -20,7 +20,7 @@
     align-items: center;
   }
 
-  &__iconContainer {
+  &__icon {
     background-color: white;
     border-radius: 50%;
     width: 50px;
@@ -29,11 +29,11 @@
     justify-content: center;
     align-items: center;
     margin: 20px 0 18px 0;
+  }
 
-    &__icon {
-      width: 30px;
-      height: 30px;
-    }
+  &__favicon {
+    width: 30px;
+    height: 30px;
   }
 
   &__label {
@@ -70,27 +70,11 @@
     .searchButton__label {
       color: white;
     }
+
     .searchButton__more__icon {
       color: white;
       border-radius: 50%;
     }
-
-    &:before {
-      top: 0;
-    }
-  }
-
-  &:before {
-    content: "";
-    position: absolute;
-    background-color: transparent;
-    bottom: 0;
-    left: 0;
-    right: 0%;
-    top: 100%;
-    z-index: -1;
-    border-radius: 5px;
-    -webkit-transition: top 0.2s ease;
   }
 
   &.-dragOver {
@@ -165,5 +149,11 @@
 .-dark {
   .MuiPaper-root {
     background-color: #1d1d1d;
+  }
+
+  .searchButton {
+    &__icon {
+      background-color: black;
+    }
   }
 }
