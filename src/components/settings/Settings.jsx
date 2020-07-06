@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ModalContainer } from '../searchbutton/SearchButton';
+import { ModalContainer, ResetDashModal } from '../modal/Modal';
 import {
   Tooltip,
   IconButton,
@@ -10,15 +10,12 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Switch,
-  Button,
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import './Settings.scss';
 import '../searchbutton/SearchButton.scss';
 
-const items = [
-  { name: 'Feedback', button: true },
-];
+const items = [{ name: 'Feedback', button: true }];
 
 const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
   const onChange = (event, value) => {
@@ -59,7 +56,7 @@ const SettingsItemReset = ({ resetDashboard }) => {
         <ListItemText primary="Reset Dashboard" />
       </ListItem>
       <ModalContainer open={modalOpen} handleClose={handleModalClose}>
-        <ModalCard
+        <ResetDashModal
           resetDashboard={handleResetDashboard}
           handleClose={handleModalClose}
         />
@@ -76,7 +73,12 @@ const SettingsItem = ({ name }) => {
   );
 };
 
-const SettingsCard = ({ onClickAway, darkMode, updateDarkMode, resetDashboard }) => {
+const SettingsCard = ({
+  onClickAway,
+  darkMode,
+  updateDarkMode,
+  resetDashboard,
+}) => {
   return (
     <ClickAwayListener onClickAway={onClickAway}>
       <Card className="settingsCard">
@@ -85,9 +87,7 @@ const SettingsCard = ({ onClickAway, darkMode, updateDarkMode, resetDashboard })
             darkMode={darkMode}
             updateDarkMode={updateDarkMode}
           />
-          <SettingsItemReset
-            resetDashboard={resetDashboard}
-          />
+          <SettingsItemReset resetDashboard={resetDashboard} />
           {items.map((i) => (
             <SettingsItem
               key={i.name}
@@ -100,28 +100,6 @@ const SettingsCard = ({ onClickAway, darkMode, updateDarkMode, resetDashboard })
         </List>
       </Card>
     </ClickAwayListener>
-  );
-};
-
-const ModalCard = ({ handleClose, resetDashboard }) => {
-  return (
-    <Card className="modalCard -confirmation">
-      <div className="modalCard__header">Are you sure?</div>
-      <div className="modalCard__row">
-        <div className="modalCard__buttons">
-          <Button onClick={handleClose} variant="outlined">
-            Cancel
-          </Button>
-          <Button
-            className="modalCard__button -primary"
-            onClick={resetDashboard}
-            variant="contained"
-          >
-            Yes
-          </Button>
-        </div>
-      </div>
-    </Card>
   );
 };
 

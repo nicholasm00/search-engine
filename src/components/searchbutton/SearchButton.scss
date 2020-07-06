@@ -90,62 +90,6 @@
   }
 }
 
-.modalCard {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 320px;
-  height: 200px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  &__input {
-    width: 80%;
-  }
-
-  &__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__header {
-    margin-bottom: 10px;
-  }
-
-  &__buttons {
-    display: flex;
-  }
-
-  &__button {
-    &.-primary {
-      background-color: black;
-      color: white;
-      margin-left: 10px;
-
-      &:hover {
-        background-color: #000000d5;
-      }
-    }
-  }
-
-  &__checkbox {
-    width: 160px;
-  }
-
-  &.-confirmation {
-    height: 80px;
-    width: 180px;
-  }
-}
-
-.colorPickerModal {
-  margin-top: 20px;
-}
-
 .-dark {
   .MuiPaper-root {
     background-color: #1d1d1d;

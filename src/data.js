@@ -44,7 +44,7 @@ export const data = [
     suffix: '',
     color: '#1DB954',
     id: 104,
-    favicon: 'https://www.scdn.co/i/_global/favicon.png',
+    favicon: 'https://open.spotify.com/favicon.ico',
   },
   {
     name: 'Wikipedia',

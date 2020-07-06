@@ -1,154 +1,8 @@
 import React, { useState } from 'react';
-import {
-  IconButton,
-  Modal,
-  Backdrop,
-  Fade,
-  Card,
-  Button,
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Tooltip,
-  ClickAwayListener,
-} from '@material-ui/core';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
+import { ModalContainer, EditSearchModal } from '../modal/Modal';
+import { IconButton } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { BlockPicker } from 'react-color';
 import './SearchButton.scss';
-
-export const ColorPicker = ({ color, onChangeColor }) => {
-  const [open, setOpen] = useState(false);
-
-  const colorArr = [
-    '#FF6900',
-    '#FCB900',
-    '#7BDCB5',
-    '#00D084',
-    '#8ED1FC',
-    '#0693E3',
-    '#ABB8C3',
-    '#EB144C',
-    '#F78DA7',
-    '#9900EF',
-  ];
-
-  const onClickAway = () => {
-    setOpen(false);
-  };
-
-  const onClick = () => {
-    setOpen((prev) => !prev);
-  };
-
-  const onChangeComplete = (col) => {
-    onChangeColor(col.hex);
-  };
-
-  return (
-    <Tooltip
-      open={open}
-      title={
-        <ClickAwayListener onClickAway={onClickAway}>
-          <div className="colorPickerModal">
-            <BlockPicker
-              color={color}
-              colors={colorArr}
-              onChangeComplete={onChangeComplete}
-            />
-          </div>
-        </ClickAwayListener>
-      }
-      interactive
-      placement="bottom"
-    >
-      <IconButton onClick={onClick} style={{ backgroundColor: color }}>
-        <ColorLensIcon />
-      </IconButton>
-    </Tooltip>
-  );
-};
-
-export const DefaultBox = ({ onChangeDefault, isDefault }) => {
-  return (
-    <div className="modalCard__checkbox">
-      <FormControlLabel
-        label="Make Default"
-        control={
-          <Checkbox
-            color="default"
-            onChange={onChangeDefault}
-            defaultChecked={isDefault}
-          />
-        }
-      />
-    </div>
-  );
-};
-
-const ModalCard = ({
-  deleteItem,
-  name,
-  handleClose,
-  editItem,
-  onChangeName,
-  isDefault,
-  onChangeDefault,
-  color,
-  onChangeColor,
-}) => {
-  return (
-    <Card className="modalCard">
-      <div className="modalCard__header">{`Edit '${name}'`}</div>
-      <div className="modalCard__row">
-        <TextField
-          onChange={onChangeName}
-          className="modalCard__input"
-          defaultValue={name}
-          label="Name"
-          variant="outlined"
-        />
-        <ColorPicker color={color} onChangeColor={onChangeColor} />
-      </div>
-      <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
-      <div className="modalCard__row">
-        <div className="modalCard__buttons">
-          <Button onClick={deleteItem} variant="outlined">
-            Delete
-          </Button>
-        </div>
-        <div className="modalCard__buttons">
-          <Button onClick={handleClose} variant="outlined">
-            Cancel
-          </Button>
-          <Button
-            className="modalCard__button -primary"
-            onClick={editItem}
-            variant="contained"
-          >
-            Save
-          </Button>
-        </div>
-      </div>
-    </Card>
-  );
-};
-
-export const ModalContainer = ({ open, handleClose, children }) => {
-  return (
-    <Modal
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-      }}
-    >
-      <Fade in={open}>{children}</Fade>
-    </Modal>
-  );
-};
 
 export default function SearchButton({
   name,
@@ -248,7 +102,7 @@ export default function SearchButton({
       onDragOver={onDragOverFunc}
       onDragStart={onDragStartFunc}
       onDragEnd={onDragEndFunc}
-      style={{ backgroundColor: (currSearchId === id ? color : null) }}
+      style={{ backgroundColor: currSearchId === id ? color : null }}
       title={name}
     >
       <div className="searchButton__container">
@@ -260,7 +114,7 @@ export default function SearchButton({
           <MoreVertIcon className="searchButton__more__icon" />
         </IconButton>
         <ModalContainer open={modalOpen} handleClose={handleModalClose}>
-          <ModalCard
+          <EditSearchModal
             deleteItem={deleteItemFunc}
             name={name}
             handleClose={handleModalClose}

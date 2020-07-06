@@ -1,53 +1,9 @@
 import React, { useState } from 'react';
-import { ModalContainer, ColorPicker, DefaultBox } from './SearchButton';
-import { Card, Button, TextField } from '@material-ui/core';
+import { ModalContainer, AddSearchModal } from '../modal/Modal';
 import AddIcon from '@material-ui/icons/Add';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import './SearchButton.scss';
 
 const INITIAL_COLOR = '#ffffff';
-
-const ModalCard = ({
-  addItem,
-  handleClose,
-  onChangeSite,
-  data,
-  isDefault,
-  onChangeDefault,
-  color,
-  onChangeColor,
-}) => {
-  return (
-    <Card className="modalCard">
-      <div>Add Search</div>
-      <div className="modalCard__row">
-        <Autocomplete
-          onChange={onChangeSite}
-          className="modalCard__input"
-          options={data}
-          getOptionLabel={(item) => item.name}
-          renderInput={(params) => (
-            <TextField {...params} label="Site" variant="outlined" />
-          )}
-        />
-        <ColorPicker color={color} onChangeColor={onChangeColor} />
-      </div>
-      <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
-      <div className="modalCard__row">
-        <Button onClick={handleClose} variant="outlined">
-          Cancel
-        </Button>
-        <Button
-          onClick={addItem}
-          variant="contained"
-          className="modalCard__button -primary"
-        >
-          Add
-        </Button>
-      </div>
-    </Card>
-  );
-};
 
 const randId = () => {
   return Math.random().toString(36).substr(2, 9);
@@ -108,7 +64,7 @@ export default function SearchButtonAdd({ addItem, data }) {
         </div>
         <span className="searchButton__label">Add Search</span>
         <ModalContainer open={modalOpen} handleClose={handleModalClose}>
-          <ModalCard
+          <AddSearchModal
             addItem={addItemFunc}
             onChangeSite={onChangeSite}
             handleClose={handleModalClose}
