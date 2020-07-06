@@ -2,7 +2,7 @@
   position: relative;
   height: 120px;
   width: 110px;
-  border-radius: 7px;
+  border-radius: 5px;
   outline: 0;
   border: none;
   cursor: pointer;
@@ -29,29 +29,11 @@
     justify-content: center;
     align-items: center;
     margin: 20px 0 18px 0;
-
-    &__add {
-      width: 30px;
-      height: 30px;
-    }
   }
 
-  @keyframes border {
-    0% {
-      box-shadow: 30px -30px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
-    }
-    25% {
-      box-shadow: 0 -70px 0 1px white, -30px -30px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
-    }
-    50% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, -30px 30px 0 1px white, 30px 30px 0 1px white;
-    }
-    75% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 30px 30px 0 1px white;
-    }
-    100% {
-      box-shadow: 0 -70px 0 1px white, -70px 0px 0 1px white, 0px 70px 0 1px white, 65px 20px 0 1px white;
-    }
+  &__favicon {
+    width: 30px;
+    height: 30px;
   }
 
   &__label {
@@ -85,38 +67,14 @@
   }
 
   &.-curr {
-    color: white;
-
-    .searchButton__more__icon {
+    .searchButton__label {
       color: white;
     }
 
-    .searchButton__more {
-      :hover {
-        background-color: gray;
-        border-radius: 50%;
-      }
+    .searchButton__more__icon {
+      color: white;
+      border-radius: 50%;
     }
-
-    &:before {
-      .searchButton__icon {
-        animation: border 0.3s ease 1 forwards;
-      }
-      top: 0;
-    }
-  }
-
-  &:before {
-    content: "";
-    position: absolute;
-    background-color: #777777b2;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 100%;
-    z-index: -1;
-    border-radius: 7px;
-    -webkit-transition: top 0.2s ease;
   }
 
   &.-dragOver {
@@ -177,6 +135,11 @@
   &__checkbox {
     width: 160px;
   }
+
+  &.-confirmation {
+    height: 80px;
+    width: 180px;
+  }
 }
 
 .colorPickerModal {
@@ -186,5 +149,11 @@
 .-dark {
   .MuiPaper-root {
     background-color: #1d1d1d;
+  }
+
+  .searchButton {
+    &__icon {
+      background-color: black;
+    }
   }
 }

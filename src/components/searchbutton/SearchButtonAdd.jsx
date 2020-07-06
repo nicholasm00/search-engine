@@ -103,7 +103,7 @@ export default function SearchButtonAdd({ addItem, data }) {
       <div className="searchButton__container">
         <div className="searchButton__iconContainer">
           <div className="searchButton__icon">
-            <AddIcon className="searchButton__icon__add" />
+            <AddIcon className="searchButton__favicon" />
           </div>
         </div>
         <span className="searchButton__label">Add Search</span>

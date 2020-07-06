@@ -5,7 +5,7 @@ import Settings from './components/settings/Settings';
 import SearchBar from './components/searchbar/SearchBar';
 import SearchButton from './components/searchbutton/SearchButton';
 import SearchButtonAdd from './components/searchbutton/SearchButtonAdd';
-import { data } from './data';
+import { data, initDashboard } from './data';
 import './app.scss';
 
 const deepCopy = (input) => {
@@ -34,7 +34,7 @@ export default function App() {
   useEffect(() => {
     // chrome.storage.sync.get(null, (res) => {
     //   let val = res['chrome-storage-dashboard'];
-    //   updateDashboard(val === undefined ? deepCopy(data) : val);
+    //   updateDashboard(val === undefined ? initDashboard : val);
     //   val = res['chrome-storage-default-id'];
     //   let defId = val === undefined ? data[0].id : val;
     //   updateDefaultId(defId);
@@ -43,7 +43,7 @@ export default function App() {
     //   updateDarkMode(val === undefined ? false : val);
     //   setLoading(false);
     // });
-    setDashboard(deepCopy(data));
+    setDashboard(initDashboard);
     setDefaultId(data[0].id);
     setDarkMode(false);
     setCurrSearch(data[0]);
@@ -64,6 +64,10 @@ export default function App() {
     setDashboard(val);
     //chrome.storage.sync.set({ 'chrome-storage-dashboard': val });
   };
+
+  const resetDashboard = () => {
+    updateDashboard(initDashboard);
+  }
 
   const updateDefaultId = (val) => {
     setDefaultId(val);
@@ -134,7 +138,7 @@ export default function App() {
     !loading && (
       <div className="app">
         <div className="app__corner -topRight">
-          <Settings darkMode={darkMode} updateDarkMode={updateDarkMode} />
+          <Settings darkMode={darkMode} updateDarkMode={updateDarkMode} resetDashboard={resetDashboard} />
         </div>
         <div className="app__dashboard">
           <SearchBar searchData={currSearch} />
@@ -146,6 +150,7 @@ export default function App() {
                 name={item.name}
                 path={item.path}
                 color={item.color}
+                favicon={item.favicon}
                 updateSearch={updateSearch}
                 deleteItem={deleteItem}
                 editItem={editItem}
