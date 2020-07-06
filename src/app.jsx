@@ -67,7 +67,7 @@ export default function App() {
 
   const resetDashboard = () => {
     updateDashboard(initDashboard);
-  }
+  };
 
   const updateDefaultId = (val) => {
     setDefaultId(val);
@@ -138,7 +138,11 @@ export default function App() {
     !loading && (
       <div className="app">
         <div className="app__corner -topRight">
-          <Settings darkMode={darkMode} updateDarkMode={updateDarkMode} resetDashboard={resetDashboard} />
+          <Settings
+            darkMode={darkMode}
+            updateDarkMode={updateDarkMode}
+            resetDashboard={resetDashboard}
+          />
         </div>
         <div className="app__dashboard">
           <SearchBar searchData={currSearch} />

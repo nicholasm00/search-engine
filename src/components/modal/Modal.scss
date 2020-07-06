@@ -4,7 +4,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 320px;
-  height: 200px;
+  height: 180px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -44,8 +44,58 @@
     width: 160px;
   }
 
+  &__link {
+    cursor: pointer;
+  }
+
   &.-confirmation {
     height: 80px;
-    width: 180px;
+    width: 200px;
+  }
+
+  &.-addSearch {
+    height: 190px;
+  }
+
+  &.-addCustom {
+    height: 330px;
+  }
+}
+
+.tooltip {
+  width: 350px;
+  border-radius: 5px;
+  background-color: #000000da;
+  margin: 10px;
+  padding: 20px;
+  font-size: 13px;
+
+  &__url {
+    &.-query {
+      color: #ff7777;
+    }
+
+    &.-prefix {
+      color: #51bcff;
+    }
+  }
+
+  &__row {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__label {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+
+    &.-query {
+      width: 20%;
+    }
+
+    &.-prefix {
+      width: 80%;
+    }
   }
 }

@@ -31,7 +31,7 @@ export default function SearchBar({ searchData }) {
   const onSearch = (event) => {
     event.preventDefault();
     if (value === '' || !searchData.id) return;
-    const newUrl = searchData.prefix + formatSearch(value) + searchData.suffix;
+    const newUrl = searchData.prefix + formatSearch(value);
     window.location.href = newUrl;
   };
 

@@ -1,11 +1,17 @@
-const arr = ['Google', 'YouTube', 'Amazon', 'Spotify', 'Wikipedia', 'Google Images'];
+const arr = [
+  'Google',
+  'YouTube',
+  'Amazon',
+  'Spotify',
+  'Wikipedia',
+  'Google Images',
+];
 
 export const data = [
   {
     name: 'Google',
     path: 'https://www.google.com/',
     prefix: 'https://www.google.com/search?q=',
-    suffix: '',
     color: '#4285F4',
     id: 100,
     favicon: 'https://www.google.com/favicon.ico',
@@ -13,8 +19,7 @@ export const data = [
   {
     name: 'Google Images',
     path: 'https://www.google.com/imghp',
-    prefix: 'https://www.google.com/search?q=',
-    suffix: '&tbm=isch',
+    prefix: 'https://www.google.com/search?tbm=isch&q=',
     color: '#F5AF00',
     id: 101,
     favicon: 'https://www.google.com/favicon.ico',
@@ -23,7 +28,6 @@ export const data = [
     name: 'YouTube',
     path: 'https://www.youtube.com/',
     prefix: 'https://www.youtube.com/results?search_query=',
-    suffix: '',
     color: '#d71e18',
     id: 102,
     favicon: 'https://s.ytimg.com/yts/img/favicon_144-vfliLAfaB.png',
@@ -32,7 +36,6 @@ export const data = [
     name: 'Amazon',
     path: 'https://www.amazon.com/',
     prefix: 'https://www.amazon.com/s?k=',
-    suffix: '',
     color: '#EF7A1A',
     id: 103,
     favicon: 'https://www.amazon.com/favicon.ico',
@@ -41,7 +44,6 @@ export const data = [
     name: 'Spotify',
     path: 'https://open.spotify.com/',
     prefix: 'https://open.spotify.com/search/',
-    suffix: '',
     color: '#1DB954',
     id: 104,
     favicon: 'https://open.spotify.com/favicon.ico',
@@ -50,7 +52,6 @@ export const data = [
     name: 'Wikipedia',
     path: 'https://en.wikipedia.org/wiki/Main_Page',
     prefix: 'https://en.wikipedia.org/w/index.php?&search=',
-    suffix: '',
     color: '#505050',
     id: 105,
     favicon: 'https://en.wikipedia.org/favicon.ico',
@@ -59,7 +60,6 @@ export const data = [
     name: 'Reddit',
     path: 'https://www.reddit.com/',
     prefix: 'https://www.reddit.com/search/?q=',
-    suffix: '',
     color: '#FF5700',
     id: 106,
     favicon:
@@ -69,7 +69,6 @@ export const data = [
     name: 'Facebook',
     path: 'https://www.facebook.com/',
     prefix: 'https://www.facebook.com/search/top/?q=',
-    suffix: '',
     color: '#4267B2',
     id: 107,
     favicon: 'https://facebook.com/favicon.ico',
@@ -78,7 +77,6 @@ export const data = [
     name: 'Yahoo',
     path: 'https://www.yahoo.com/',
     prefix: 'https://search.yahoo.com/search?p=',
-    suffix: '',
     color: '#720e9e',
     id: 108,
     favicon: 'https://s.yimg.com/rz/l/favicon.ico',
@@ -86,9 +84,7 @@ export const data = [
   {
     name: 'eBay',
     path: 'https://www.ebay.com/',
-    prefix:
-      'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313.TR11.TRC1.A0.H0.Xok.TRS0&_nkw=',
-    suffix: '',
+    prefix: 'https://www.ebay.com/sch/i.html?_nkw=',
     color: '#86B817',
     id: 109,
     favicon: 'https://pages.ebay.com/favicon.ico',
@@ -97,7 +93,6 @@ export const data = [
     name: 'Pinterest',
     path: 'https://www.pinterest.com/',
     prefix: 'https://www.pinterest.com/search/pins/?q=',
-    suffix: '',
     color: '#c8232c',
     id: 110,
     favicon: 'https://s.pinimg.com/webapp/style/images/favicon-fd1ea058.png',
