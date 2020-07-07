@@ -4,8 +4,17 @@ import { IconButton } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import './SearchButton.scss';
 
+const LetterIcon = ({ letter }) => {
+  return (
+    <div className="letterIcon">
+      <div className="letterIcon__letter">{letter.toUpperCase()}</div>
+    </div>
+  );
+};
+
 export default function SearchButton({
   name,
+  path,
   updateSearch,
   id,
   deleteItem,
@@ -94,6 +103,12 @@ export default function SearchButton({
     return classes.join(' ');
   };
 
+  const onClickIcon = () => {
+    if (currSearchId === id && path !== '') {
+      window.location.href = path;
+    }
+  };
+
   return (
     <button
       className={getClasses()}
@@ -106,8 +121,12 @@ export default function SearchButton({
       title={name}
     >
       <div className="searchButton__container">
-        <div className="searchButton__icon">
-          <img className="searchButton__favicon" src={favicon} alt={name[0]} />
+        <div className="searchButton__icon" onClick={onClickIcon}>
+          {favicon ? (
+            <img className="searchButton__favicon" src={favicon} />
+          ) : (
+            <LetterIcon letter={name[0]} />
+          )}
         </div>
         <span className="searchButton__label">{name}</span>
         <IconButton className="searchButton__more" onClick={handleModalOpen}>

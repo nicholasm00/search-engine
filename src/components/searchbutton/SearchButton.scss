@@ -29,6 +29,7 @@
     justify-content: center;
     align-items: center;
     margin: 20px 0 18px 0;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   }
 
   &__favicon {
@@ -75,6 +76,17 @@
       color: white;
       border-radius: 50%;
     }
+
+    .searchButton__icon {
+      &:hover {
+        width: 54px;
+        height: 54px;
+        margin: 18px 0 16px 0;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+          0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+          0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+      }
+    }
   }
 
   &.-dragOver {
@@ -90,6 +102,21 @@
   }
 }
 
+.letterIcon {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7e7e7ea8;
+
+  &__letter {
+    font-size: 22px;
+    color: white;
+  }
+}
+
 .-dark {
   .MuiPaper-root {
     background-color: #1d1d1d;
@@ -98,6 +125,12 @@
   .searchButton {
     &__icon {
       background-color: black;
+    }
+  }
+
+  .letterIcon {
+    &__letter {
+      color: black;
     }
   }
 }

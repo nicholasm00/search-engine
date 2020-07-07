@@ -42,13 +42,20 @@ export default function SearchButtonAdd({ addItem, data }) {
   };
 
   const addCustomFunc = (e) => {
-    if (name === null || prefix === null || !customModalOpen) return;
+    if (name === "" || prefix === "" || !customModalOpen) return;
+    let newFavicon = favicon;
+    if (favicon === '') {
+      let arr = prefix.split('://');
+      if (arr.length === 2) {
+        newFavicon = arr[0] + '://' + arr[1].split('/')[0] + '/favicon.ico';
+      }
+    }
     let newItem = {
       id: randId(),
       name: name,
       prefix: prefix,
       path: home,
-      favicon: favicon,
+      favicon: newFavicon,
       color: newColor,
     };
     addItem(newItem, newDefault);
@@ -84,6 +91,11 @@ export default function SearchButtonAdd({ addItem, data }) {
   };
 
   const onChangeSite = (e, value) => {
+    if (value.inputValue) {
+      setName(value.inputValue);
+      onCreateCustom();
+      return;
+    }
     setSite(value);
     if (!value) {
       setNewColor(INITIAL_COLOR);
@@ -92,7 +104,7 @@ export default function SearchButtonAdd({ addItem, data }) {
     }
   };
 
-  const onCreateCustom = (e) => {
+  const onCreateCustom = () => {
     setAddModalOpen(false);
     setSite(null);
     setCustomModalOpen(true);
@@ -133,7 +145,6 @@ export default function SearchButtonAdd({ addItem, data }) {
             onChangeDefault={onChangeDefault}
             color={newColor}
             onChangeColor={onChangeColor}
-            onCreateCustom={onCreateCustom}
           />
         </ModalContainer>
         <ModalContainer

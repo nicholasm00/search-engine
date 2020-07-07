@@ -44,17 +44,9 @@
     width: 160px;
   }
 
-  &__link {
-    cursor: pointer;
-  }
-
   &.-confirmation {
     height: 80px;
     width: 200px;
-  }
-
-  &.-addSearch {
-    height: 190px;
   }
 
   &.-addCustom {
@@ -72,11 +64,11 @@
 
   &__url {
     &.-query {
-      color: #ff7777;
+      color: #ffaea3;
     }
 
     &.-prefix {
-      color: #51bcff;
+      color: #a4ffe1;
     }
   }
 
