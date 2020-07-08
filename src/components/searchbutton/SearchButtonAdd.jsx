@@ -7,7 +7,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 import './SearchButton.scss';
 
-const INITIAL_COLOR = '#0693e3';
+const INITIAL_COLOR = '#4285f4';
 
 const randId = () => {
   return Math.random().toString(36).substr(2, 9);

@@ -7,7 +7,9 @@ import './SearchButton.scss';
 const LetterIcon = ({ letter }) => {
   return (
     <div className="letterIcon">
-      <div className="letterIcon__letter">{letter.toUpperCase()}</div>
+      <div className="letterIcon__letter" draggable={false}>
+        {letter.toUpperCase()}
+      </div>
     </div>
   );
 };
@@ -123,7 +125,11 @@ export default function SearchButton({
       <div className="searchButton__container">
         <div className="searchButton__icon" onClick={onClickIcon}>
           {favicon ? (
-            <img className="searchButton__favicon" src={favicon} />
+            <img
+              className="searchButton__favicon"
+              src={favicon}
+              draggable={false}
+            />
           ) : (
             <LetterIcon letter={name[0]} />
           )}

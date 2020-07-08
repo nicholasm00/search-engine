@@ -1,6 +1,11 @@
 .settings {
   &__icon {
     color: gray;
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+
+    &.-open {
+      transform: rotate(90deg);
+    }
   }
 }
 

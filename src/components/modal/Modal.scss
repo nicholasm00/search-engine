@@ -91,3 +91,14 @@
     }
   }
 }
+
+.-dark {
+  .MuiFilledInput-underline:after {
+    border-bottom-color: #3a97ee;
+  }
+
+  .MuiFormLabel-root.Mui-focused {
+    color: #3a97ee;
+  }
+}
+

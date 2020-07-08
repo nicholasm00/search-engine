@@ -20,6 +20,12 @@ const deepCopy = (input) => {
   return output;
 };
 
+const sortArr = (arr) => {
+  let sorted = deepCopy(arr);
+  sorted.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1));
+  return sorted;
+};
+
 const MAX_DASHBOARD_LENGTH = 10;
 
 export default function App() {
@@ -169,7 +175,7 @@ export default function App() {
               />
             ))}
             {dashboard.length < MAX_DASHBOARD_LENGTH && (
-              <SearchButtonAdd addItem={addItem} data={data} />
+              <SearchButtonAdd addItem={addItem} data={sortArr(data)} />
             )}
           </div>
         </div>

@@ -114,6 +114,12 @@ export default function Settings({ darkMode, updateDarkMode, resetDashboard }) {
     setOpen(false);
   };
 
+  const getClasses = () => {
+    let classes = ['settings__icon'];
+    if (open) classes.push('-open');
+    return classes.join(' ');
+  };
+
   return (
     <Tooltip
       className="settings"
@@ -130,7 +136,7 @@ export default function Settings({ darkMode, updateDarkMode, resetDashboard }) {
       interactive
     >
       <IconButton onClick={onClick}>
-        <SettingsIcon className="settings__icon" />
+        <SettingsIcon className={getClasses()} />
       </IconButton>
     </Tooltip>
   );

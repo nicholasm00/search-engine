@@ -8,16 +8,16 @@ export default function ColorPicker({ color, onChangeColor }) {
   const [open, setOpen] = useState(false);
 
   const colorArr = [
-    '#FF6900',
-    '#FCB900',
-    '#7BDCB5',
-    '#00D084',
-    '#8ED1FC',
-    '#0693E3',
-    '#ABB8C3',
-    '#EB144C',
-    '#F78DA7',
-    '#9900EF',
+    '#4285f4',
+    '#18ca58',
+    '#fdc216',
+    '#ed1b1a',
+    '#8715dc',
+    '#1c50b9',
+    '#00ad8d',
+    '#ff720a',
+    '#af0954',
+    '#5f5f5f',
   ];
 
   const onClickAway = () => {
