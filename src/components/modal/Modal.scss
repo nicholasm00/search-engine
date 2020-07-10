@@ -51,9 +51,18 @@
     width: 160px;
   }
 
+  &__link {
+    cursor: pointer;
+    color: #1f63db;
+  }
+
   &.-confirmation {
     height: 80px;
     width: 200px;
+  }
+
+  &.-addSearch {
+    height: 190px;
   }
 
   &.-addCustom {
@@ -112,11 +121,23 @@
     &__button {
       &.-primary {
         background-color: #222222;
+
+        &:hover {
+          background-color: black;
+        }
       }
   
       &.-secondary {
         background-color: #555555;
+
+        &:hover {
+          background-color: #5e5e5e;
+        }
       }
+    }
+
+    &__link {
+      color: #3f99ed;
     }
   }
 }

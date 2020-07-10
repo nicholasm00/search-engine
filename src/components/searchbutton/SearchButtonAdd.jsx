@@ -42,7 +42,7 @@ export default function SearchButtonAdd({ addItem, data }) {
   };
 
   const addCustomFunc = (e) => {
-    if (name === "" || prefix === "" || !customModalOpen) return;
+    if (name === '' || prefix === '' || !customModalOpen) return;
     let newFavicon = favicon;
     if (favicon === '') {
       let arr = prefix.split('://');
@@ -145,6 +145,7 @@ export default function SearchButtonAdd({ addItem, data }) {
             onChangeDefault={onChangeDefault}
             color={newColor}
             onChangeColor={onChangeColor}
+            onCreateCustom={onCreateCustom}
           />
         </ModalContainer>
         <ModalContainer

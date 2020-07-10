@@ -14,9 +14,9 @@
 
   &__dashboard {
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -10%);
     width: 600px;
     display: flex;
     flex-direction: column;
@@ -24,8 +24,8 @@
     align-items: center;
 
     &__logo {
-      width: 300px;
-      margin-bottom: 30px;
+      width: 320px;
+      margin-bottom: 40px;
     }
 
     &__buttons {

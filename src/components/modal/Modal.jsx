@@ -10,11 +10,12 @@ import {
   TextField,
   Tooltip,
   IconButton,
+  Link,
 } from '@material-ui/core';
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
-import { HelpIcon } from '@material-ui/icons/Help';
+import HelpIcon from '@material-ui/icons/Help';
 import './Modal.scss';
 
 const filter = createFilterOptions();
@@ -231,6 +232,7 @@ export const AddSearchModal = ({
   onChangeDefault,
   color,
   onChangeColor,
+  onCreateCustom,
 }) => {
   const filterOptions = (options, params) => {
     const filtered = filter(options, params);
@@ -245,7 +247,7 @@ export const AddSearchModal = ({
   };
 
   return (
-    <Card className="modal">
+    <Card className="modal -addSearch">
       <div>Add Search</div>
       <div className="modal__row">
         <Autocomplete
@@ -259,6 +261,17 @@ export const AddSearchModal = ({
           filterOptions={filterOptions}
         />
         <ColorPicker color={color} onChangeColor={onChangeColor} />
+      </div>
+      <div>
+        <span>Or </span>
+        <Link
+          className="modal__link"
+          onClick={onCreateCustom}
+          color="inherit"
+          variant="body2"
+        >
+          create a custom search
+        </Link>
       </div>
       <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modal__row">
