@@ -5,11 +5,15 @@ import Settings from './components/settings/Settings';
 import SearchBar from './components/searchbar/SearchBar';
 import SearchButton from './components/searchbutton/SearchButton';
 import SearchButtonAdd from './components/searchbutton/SearchButtonAdd';
+import { Snackbar, Slide, Fade, Button, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import { data, initDashboard } from './data';
 import './app.scss';
 
 const dashboardLogoLight = require('./assets/dashboard_logo_light.svg');
 const dashboardLogoDark = require('./assets/dashboard_logo_dark.svg');
+
+const MAX_DASHBOARD_LENGTH = 10;
 
 const deepCopy = (input) => {
   if (typeof input !== 'object' || input === null) {
@@ -29,7 +33,70 @@ const sortArr = (arr) => {
   return sorted;
 };
 
-const MAX_DASHBOARD_LENGTH = 10;
+const SlideTransition = (props) => {
+  return <Slide {...props} direction="up" />;
+};
+
+const AlertModal = ({ alertOpen, setAlertOpen, message, handleUndo }) => {
+  const [state, setState] = useState({
+    open: false,
+    Transition: Fade,
+  });
+
+  useEffect(() => {
+    if (alertOpen) {
+      handleOpen(SlideTransition);
+    }
+  }, [alertOpen]);
+
+  const handleOpen = (Transition) => {
+    setState({
+      open: true,
+      Transition,
+    });
+  };
+
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+    setAlertOpen(false);
+  };
+
+  const onClickUndo = () => {
+    handleUndo();
+    handleClose();
+  }
+
+  return (
+    <div className="alertModal">
+      <Snackbar
+        open={state.open}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        TransitionComponent={state.Transition}
+        message={message}
+        key={state.Transition.name}
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={onClickUndo}>
+              Undo
+            </Button>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+    </div>
+  );
+};
 
 export default function App() {
   const [dashboard, setDashboard] = useState(null);
@@ -40,6 +107,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [dragStartIndex, setDragStartIndex] = useState(-1);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
+  const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
+  const [resetAlertOpen, setResetAlertOpen] = useState(false);
+  const [savedDash, setSavedDash] = useState(null);
+  const [lastDeleted, setLastDeleted] = useState('');
 
   useEffect(() => {
     // chrome.storage.sync.get(null, (res) => {
@@ -75,10 +146,6 @@ export default function App() {
     //chrome.storage.sync.set({ 'chrome-storage-dashboard': val });
   };
 
-  const resetDashboard = () => {
-    updateDashboard(deepCopy(initDashboard));
-  };
-
   const updateDefaultId = (val) => {
     setDefaultId(val);
     //chrome.storage.sync.set({ 'chrome-storage-default-id': val });
@@ -89,17 +156,27 @@ export default function App() {
     //chrome.storage.sync.set({ 'chrome-storage-dark-mode': val });
   };
 
+  const resetDashboard = () => {
+    setSavedDash(deepCopy(dashboard));
+    updateDashboard(deepCopy(initDashboard));
+    setResetAlertOpen(true);
+  };
+
   const updateSearch = (id) => {
     const found = dashboard.find((item) => item.id === id);
     setCurrSearch(found);
   };
 
   const deleteItem = (id) => {
+    const found = dashboard.find((item) => item.id === id);
+    setLastDeleted(found);
+    setSavedDash(deepCopy(dashboard));
     let newDash = dashboard.filter((item) => item.id !== id);
     updateDashboard(newDash);
     if (id === currSearch.id) {
       setCurrSearch({});
     }
+    setDeleteAlertOpen(true);
   };
 
   const addItem = (item, isDefault) => {
@@ -144,6 +221,10 @@ export default function App() {
     setDragOverIndex(-1);
   };
 
+  const handleUndo = () => {
+    setDashboard(savedDash);
+  }
+
   return (
     !loading && (
       <div className="app">
@@ -187,6 +268,18 @@ export default function App() {
             resetDashboard={resetDashboard}
           />
         </div>
+        <AlertModal
+          alertOpen={deleteAlertOpen}
+          setAlertOpen={setDeleteAlertOpen}
+          message={`${lastDeleted.name} deleted`}
+          handleUndo={handleUndo}
+        />
+        <AlertModal
+          alertOpen={resetAlertOpen}
+          setAlertOpen={setResetAlertOpen}
+          message={`Dashboard reset`}
+          handleUndo={handleUndo}
+        />
       </div>
     )
   );

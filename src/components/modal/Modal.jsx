@@ -14,7 +14,7 @@ import {
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
-import HelpIcon from '@material-ui/icons/Help';
+import { HelpIcon } from '@material-ui/icons/Help';
 import './Modal.scss';
 
 const filter = createFilterOptions();
@@ -24,7 +24,11 @@ export const ResetDashModal = ({ handleClose, resetDashboard }) => {
     <Card className="modal -confirmation">
       <div className="modal__header">Are you sure?</div>
       <div className="modal__row">
-        <Button onClick={handleClose} variant="outlined">
+        <Button
+          className="modal__button -secondary"
+          onClick={handleClose}
+          variant="outlined"
+        >
           Cancel
         </Button>
         <Button
@@ -51,7 +55,7 @@ export const EditSearchModal = ({
   onChangeColor,
 }) => {
   return (
-    <Card className="modal">
+    <Card className="modal" onClick={(e) => e.stopPropagation()}>
       <div className="modal__header">{`Edit '${name}'`}</div>
       <div className="modal__row">
         <TextField
@@ -67,12 +71,20 @@ export const EditSearchModal = ({
       <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modal__row">
         <div className="modal__buttons">
-          <Button onClick={deleteItem} variant="outlined">
+          <Button
+            className="modal__button -secondary"
+            onClick={deleteItem}
+            variant="outlined"
+          >
             Delete
           </Button>
         </div>
         <div className="modal__buttons">
-          <Button onClick={handleClose} variant="outlined">
+          <Button
+            className="modal__button -secondary"
+            onClick={handleClose}
+            variant="outlined"
+          >
             Cancel
           </Button>
           <Button
@@ -250,7 +262,11 @@ export const AddSearchModal = ({
       </div>
       <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modal__row">
-        <Button onClick={handleClose} variant="outlined">
+        <Button
+          className="modal__button -secondary"
+          onClick={handleClose}
+          variant="outlined"
+        >
           Cancel
         </Button>
         <Button

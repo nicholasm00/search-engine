@@ -10,6 +10,7 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Switch,
+  Divider,
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import './Settings.scss';
@@ -34,7 +35,7 @@ const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
   );
 };
 
-const SettingsItemReset = ({ resetDashboard }) => {
+const SettingsItemReset = ({ resetDashboard, setSettingsOpen }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalClose = (e) => {
@@ -49,6 +50,7 @@ const SettingsItemReset = ({ resetDashboard }) => {
 
   const handleResetDashboard = () => {
     setModalOpen(false);
+    setSettingsOpen(false);
     resetDashboard();
   };
 
@@ -84,6 +86,7 @@ const SettingsCard = ({
   darkMode,
   updateDarkMode,
   resetDashboard,
+  setSettingsOpen,
 }) => {
   return (
     <ClickAwayListener onClickAway={onClickAway}>
@@ -93,7 +96,13 @@ const SettingsCard = ({
             darkMode={darkMode}
             updateDarkMode={updateDarkMode}
           />
-          <SettingsItemReset resetDashboard={resetDashboard} />
+        </List>
+        <Divider />
+        <List>
+          <SettingsItemReset
+            resetDashboard={resetDashboard}
+            setSettingsOpen={setSettingsOpen}
+          />
           {items.map((i) => (
             <SettingsItem key={i.name} name={i.name} link={i.link} />
           ))}
@@ -129,6 +138,7 @@ export default function Settings({ darkMode, updateDarkMode, resetDashboard }) {
           darkMode={darkMode}
           updateDarkMode={updateDarkMode}
           resetDashboard={resetDashboard}
+          setSettingsOpen={setOpen}
         />
       }
       open={open}

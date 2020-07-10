@@ -42,12 +42,13 @@ export default function ColorPicker({ color, onChangeColor }) {
               color={color}
               colors={colorArr}
               onChangeComplete={onChangeComplete}
+              triangle={"hide"}
             />
           </div>
         </ClickAwayListener>
       }
       interactive
-      placement="bottom"
+      placement="right"
     >
       <IconButton onClick={onClick} style={{ backgroundColor: color }}>
         <ColorLensIcon />

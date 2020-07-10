@@ -14,9 +14,9 @@
 
   &__dashboard {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
-    transform: translate(-50%, -35%);
+    transform: translate(-50%, -20%);
     width: 600px;
     display: flex;
     flex-direction: column;
@@ -35,6 +35,30 @@
       justify-content: center;
       flex-wrap: wrap;
       margin: 10px;
+    }
+  }
+}
+
+.alertModal {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+
+  .MuiButton-label {
+    color: #ff4949;
+  }
+}
+
+.-dark {
+  .alertModal {
+    .MuiSnackbarContent-root {
+      background-color: #4e4e4e;
+    }
+
+    .MuiButton-label {
+      color: #ff7171;
     }
   }
 }

@@ -41,8 +41,7 @@ export default function SearchButton({
     updateSearch(id);
   };
 
-  const deleteItemFunc = (e) => {
-    e.stopPropagation();
+  const deleteItemFunc = () => {
     deleteItem(id);
   };
 
