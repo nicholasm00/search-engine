@@ -16,7 +16,6 @@ const LetterIcon = ({ letter }) => {
 
 export default function SearchButton({
   name,
-  path,
   updateSearch,
   id,
   deleteItem,
@@ -31,6 +30,7 @@ export default function SearchButton({
   onDragStart,
   onDragOver,
   onDragEnd,
+  setFocus,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newName, setNewName] = useState(name);
@@ -105,16 +105,20 @@ export default function SearchButton({
     return classes.join(' ');
   };
 
-  const onClickIcon = () => {
-    if (currSearchId === id && path !== '') {
-      window.location.href = path;
-    }
+  const onSearchClick = () => {
+    setFocus(true);
+  };
+
+  const onSearchFocus = () => {
+    setFocus(false);
+    updateSearchFunc();
   };
 
   return (
     <button
       className={getClasses()}
-      onClick={updateSearchFunc}
+      onClick={onSearchClick}
+      onFocus={onSearchFocus}
       draggable={true}
       onDragOver={onDragOverFunc}
       onDragStart={onDragStartFunc}
@@ -123,7 +127,7 @@ export default function SearchButton({
       title={name}
     >
       <div className="searchButton__container">
-        <div className="searchButton__icon" onClick={onClickIcon}>
+        <div className="searchButton__icon">
           {favicon ? (
             <img
               className="searchButton__favicon"

@@ -8,6 +8,9 @@ import SearchButtonAdd from './components/searchbutton/SearchButtonAdd';
 import { data, initDashboard } from './data';
 import './app.scss';
 
+const dashboardLogoLight = require('./assets/dashboard_logo_light.svg');
+const dashboardLogoDark = require('./assets/dashboard_logo_dark.svg');
+
 const deepCopy = (input) => {
   if (typeof input !== 'object' || input === null) {
     return input;
@@ -33,6 +36,7 @@ export default function App() {
   const [defaultId, setDefaultId] = useState(null);
   const [darkMode, setDarkMode] = useState(null);
   const [currSearch, setCurrSearch] = useState({});
+  const [focus, setFocus] = useState(true);
   const [loading, setLoading] = useState(true);
   const [dragStartIndex, setDragStartIndex] = useState(-1);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
@@ -40,7 +44,7 @@ export default function App() {
   useEffect(() => {
     // chrome.storage.sync.get(null, (res) => {
     //   let val = res['chrome-storage-dashboard'];
-    //   updateDashboard(val === undefined ? initDashboard : val);
+    //   updateDashboard(val === undefined ? deepCopy(initDashboard) : val);
     //   val = res['chrome-storage-default-id'];
     //   let defId = val === undefined ? data[0].id : val;
     //   updateDefaultId(defId);
@@ -49,7 +53,7 @@ export default function App() {
     //   updateDarkMode(val === undefined ? false : val);
     //   setLoading(false);
     // });
-    setDashboard(initDashboard);
+    setDashboard(deepCopy(initDashboard));
     setDefaultId(data[0].id);
     setDarkMode(false);
     setCurrSearch(data[0]);
@@ -72,7 +76,7 @@ export default function App() {
   };
 
   const resetDashboard = () => {
-    updateDashboard(initDashboard);
+    updateDashboard(deepCopy(initDashboard));
   };
 
   const updateDefaultId = (val) => {
@@ -143,22 +147,18 @@ export default function App() {
   return (
     !loading && (
       <div className="app">
-        <div className="app__corner -topRight">
-          <Settings
-            darkMode={darkMode}
-            updateDarkMode={updateDarkMode}
-            resetDashboard={resetDashboard}
-          />
-        </div>
         <div className="app__dashboard">
-          <SearchBar searchData={currSearch} />
+          <img
+            className="app__dashboard__logo"
+            src={darkMode ? dashboardLogoDark : dashboardLogoLight}
+          />
+          <SearchBar searchData={currSearch} focus={focus} />
           <div className="app__dashboard__buttons">
             {dashboard.map((item, index) => (
               <SearchButton
                 key={item.id}
                 id={item.id}
                 name={item.name}
-                path={item.path}
                 color={item.color}
                 favicon={item.favicon}
                 updateSearch={updateSearch}
@@ -172,12 +172,20 @@ export default function App() {
                 onDragStart={onDragStart}
                 onDragOver={onDragOver}
                 onDragEnd={onDragEnd}
+                setFocus={setFocus}
               />
             ))}
             {dashboard.length < MAX_DASHBOARD_LENGTH && (
               <SearchButtonAdd addItem={addItem} data={sortArr(data)} />
             )}
           </div>
+        </div>
+        <div className="app__corner -topRight">
+          <Settings
+            darkMode={darkMode}
+            updateDarkMode={updateDarkMode}
+            resetDashboard={resetDashboard}
+          />
         </div>
       </div>
     )

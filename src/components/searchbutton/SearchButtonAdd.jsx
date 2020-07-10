@@ -127,7 +127,7 @@ export default function SearchButtonAdd({ addItem, data }) {
   };
 
   return (
-    <button className="searchButton" onClick={handleAddModalOpen}>
+    <button className="searchButton -add" onClick={handleAddModalOpen}>
       <div className="searchButton__container">
         <div className="searchButton__iconContainer">
           <div className="searchButton__icon">

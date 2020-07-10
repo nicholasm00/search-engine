@@ -15,7 +15,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import './Settings.scss';
 import '../searchbutton/SearchButton.scss';
 
-const items = [{ name: 'Feedback', button: true }];
+const items = [
+  { name: 'Send feedback', link: 'https://forms.gle/5joWCZYEDisC35Hj9' },
+];
 
 const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
   const onChange = (event, value) => {
@@ -24,7 +26,7 @@ const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
 
   return (
     <ListItem>
-      <ListItemText primary="Dark Mode" />
+      <ListItemText primary="Dark mode" />
       <ListItemSecondaryAction>
         <Switch onChange={onChange} checked={darkMode} color="primary" />
       </ListItemSecondaryAction>
@@ -53,7 +55,7 @@ const SettingsItemReset = ({ resetDashboard }) => {
   return (
     <div>
       <ListItem button onClick={handleModalOpen}>
-        <ListItemText primary="Reset Dashboard" />
+        <ListItemText primary="Reset dashboard" />
       </ListItem>
       <ModalContainer open={modalOpen} handleClose={handleModalClose}>
         <ResetDashModal
@@ -65,9 +67,13 @@ const SettingsItemReset = ({ resetDashboard }) => {
   );
 };
 
-const SettingsItem = ({ name }) => {
+const SettingsItem = ({ name, link }) => {
+  const onClick = () => {
+    if (link) window.open(link, '_blank');
+  };
+
   return (
-    <ListItem button>
+    <ListItem button onClick={onClick}>
       <ListItemText primary={name} />
     </ListItem>
   );
@@ -89,13 +95,7 @@ const SettingsCard = ({
           />
           <SettingsItemReset resetDashboard={resetDashboard} />
           {items.map((i) => (
-            <SettingsItem
-              key={i.name}
-              name={i.name}
-              icon={i.icon}
-              switchArr={i.switchArr}
-              button={i.button}
-            />
+            <SettingsItem key={i.name} name={i.name} link={i.link} />
           ))}
         </List>
       </Card>
