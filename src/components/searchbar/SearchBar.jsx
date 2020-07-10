@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { TextField, InputAdornment, IconButton } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import './SearchBar.scss';
@@ -20,9 +20,15 @@ const SearchIcon = ({ onClick }) => {
   );
 };
 
-export default function SearchBar({ searchData }) {
+export default function SearchBar({ searchData, focus }) {
   const [value, setValue] = useState('');
-  const [focus, setFocus] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (searchData && focus) {
+      inputRef.current.focus();
+    }
+  }, [searchData, focus]);
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -30,36 +36,25 @@ export default function SearchBar({ searchData }) {
 
   const onSearch = (event) => {
     event.preventDefault();
-    if (value === '' || !searchData.id) return;
+    if (value === '') {
+      if (searchData.path === '') {
+        return;
+      } else {
+        window.location.href = searchData.path;
+      }
+    }
     const newUrl = searchData.prefix + formatSearch(value);
     window.location.href = newUrl;
-  };
-
-  const onFocus = () => {
-    setFocus(true);
-  };
-
-  const onBlur = () => {
-    setFocus(false);
-  };
-
-  const getClasses = () => {
-    let classes = ['searchbar'];
-    if (focus) {
-      classes.push('-focus');
-    }
-    return classes.join(' ');
   };
 
   return (
     <form className="searchbar" onSubmit={onSearch}>
       <TextField
         className="searchbar__input"
+        inputRef={inputRef}
         value={value}
         onChange={onChange}
         label={searchData.id && 'Search ' + searchData.name}
-        onFocus={onFocus}
-        onBlur={onBlur}
         variant="outlined"
         InputProps={{ endAdornment: <SearchIcon onClick={onSearch} /> }}
       />

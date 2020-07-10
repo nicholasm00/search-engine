@@ -1,7 +1,7 @@
 {
-  "name": "Create React App Sample",
+  "name": "Surchin",
   "version": "1.0",
-  "description": "Create React App Sample",
+  "description": "Search your favorite sites from new tab",
   "manifest_version": 2,
   "permissions": ["storage"],
   "chrome_url_overrides": {

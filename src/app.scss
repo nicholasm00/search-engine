@@ -14,14 +14,19 @@
 
   &__dashboard {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -35%);
     width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    &__logo {
+      width: 300px;
+      margin-bottom: 30px;
+    }
 
     &__buttons {
       width: 95%;

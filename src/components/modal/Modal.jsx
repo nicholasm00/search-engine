@@ -186,10 +186,9 @@ const PrefixHelpTooltip = () => {
 const HomeHelpTooltip = () => {
   return (
     <div className="tooltip">
-      <p>Add a link to the homepage to directly visit the website.</p>
       <p>
-        After this custom search is added to the dashboard, simply select it and
-        click the icon to go to the homepage.
+        Directly visit the homepage of a website by hitting enter when the
+        searchbar is blank.
       </p>
     </div>
   );
