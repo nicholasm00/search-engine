@@ -12,6 +12,8 @@ import {
   Switch,
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 import './Settings.scss';
 import '../searchbutton/SearchButton.scss';
 
@@ -26,7 +28,9 @@ const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
     <ListItem>
       <ListItemText primary="Dark Mode" />
       <ListItemSecondaryAction>
-        <Switch onChange={onChange} checked={darkMode} color="primary" />
+        <ToggleButton onChange={onChange} selected={darkMode} color="primary" >
+          <Brightness4Icon></Brightness4Icon>
+        </ToggleButton>
       </ListItemSecondaryAction>
     </ListItem>
   );

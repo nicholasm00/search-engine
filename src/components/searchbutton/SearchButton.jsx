@@ -31,6 +31,7 @@ export default function SearchButton({
   onDragStart,
   onDragOver,
   onDragEnd,
+  triggerAlert,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [newName, setNewName] = useState(name);
@@ -42,7 +43,7 @@ export default function SearchButton({
   };
 
   const deleteItemFunc = (e) => {
-    e.stopPropagation();
+    //e.stopPropagation();
     deleteItem(id);
   };
 
@@ -149,6 +150,7 @@ export default function SearchButton({
             onChangeDefault={onChangeDefault}
             color={newColor}
             onChangeColor={onChangeColor}
+            triggerAlert={triggerAlert}
           />
         </ModalContainer>
       </div>

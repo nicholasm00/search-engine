@@ -5,6 +5,8 @@ import Settings from './components/settings/Settings';
 import SearchBar from './components/searchbar/SearchBar';
 import SearchButton from './components/searchbutton/SearchButton';
 import SearchButtonAdd from './components/searchbutton/SearchButtonAdd';
+//import { DeleteSearchAlert } from './components/modal/Modal';
+import {Snackbar, Slide, Fade, Button} from '@material-ui/core';
 import { data, initDashboard } from './data';
 import './app.scss';
 
@@ -36,6 +38,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [dragStartIndex, setDragStartIndex] = useState(-1);
   const [dragOverIndex, setDragOverIndex] = useState(-1);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   useEffect(() => {
     // chrome.storage.sync.get(null, (res) => {
@@ -49,7 +52,7 @@ export default function App() {
     //   updateDarkMode(val === undefined ? false : val);
     //   setLoading(false);
     // });
-    setDashboard(initDashboard);
+    setDashboard(deepCopy(initDashboard));
     setDefaultId(data[0].id);
     setDarkMode(false);
     setCurrSearch(data[0]);
@@ -72,7 +75,7 @@ export default function App() {
   };
 
   const resetDashboard = () => {
-    updateDashboard(initDashboard);
+    updateDashboard(deepCopy(initDashboard));
   };
 
   const updateDefaultId = (val) => {
@@ -140,6 +143,59 @@ export default function App() {
     setDragOverIndex(-1);
   };
 
+  const triggerAlert = (val) => {
+    setAlertOpen(val);
+  }
+
+  function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+  }
+  
+  const DeleteSearchAlert = () => {
+  
+    const [state, setState] = React.useState({
+      open: false,
+      Transition: Fade,
+    });
+  
+    const handleClick = (Transition) => () => {
+      setState({
+        open: true,
+        Transition,
+      });
+    };
+  
+    const handleClose = () => {
+      setState({
+        ...state,
+        open: false,
+      });
+    };
+    return (
+      <div style={{display: alertOpen? "block": "none"}} className="app__deleteAlert">
+        <Button onClick={handleClick(SlideTransition)}>delete alert</Button>
+        <Snackbar
+          open={state.open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          TransitionComponent={state.Transition}
+          message="Search deleted"
+          key={state.Transition.name}
+          action={
+            <React.Fragment>
+              <Button color="secondary" size="small" onClick={handleClose}>
+                Undo
+              </Button>
+              {/* <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+                <CloseIcon fontSize="small" />
+              </IconButton> */}
+            </React.Fragment>
+          }
+        />
+      </div>
+    );
+  }
+
   return (
     !loading && (
       <div className="app">
@@ -172,6 +228,7 @@ export default function App() {
                 onDragStart={onDragStart}
                 onDragOver={onDragOver}
                 onDragEnd={onDragEnd}
+                triggerAlert={triggerAlert}
               />
             ))}
             {dashboard.length < MAX_DASHBOARD_LENGTH && (
@@ -179,6 +236,7 @@ export default function App() {
             )}
           </div>
         </div>
+        <DeleteSearchAlert />
       </div>
     )
   );

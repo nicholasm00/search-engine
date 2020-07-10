@@ -22,6 +22,7 @@
 
   &__header {
     margin-bottom: 10px;
+    font-weight: 600;
   }
 
   &__buttons {
@@ -30,13 +31,19 @@
 
   &__button {
     &.-primary {
-      background-color: black;
+      background-color: #404040;
       color: white;
       margin-left: 10px;
+      text-transform: capitalize;
 
       &:hover {
-        background-color: #000000d5;
+        background-color: #000000;
       }
+    }
+
+    &.-secondary {
+      color: black;
+      text-transform: capitalize;
     }
   }
 
@@ -102,3 +109,10 @@
   }
 }
 
+// .deleteAlert {
+//   position: absolute;
+//   bottom: 0%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 600px;
+// }
