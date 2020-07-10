@@ -1,7 +1,12 @@
 {
+  "title": "Surchin",
   "name": "Surchin",
   "version": "1.0",
   "description": "Search your favorite sites from new tab",
+  "icons": {
+    "192": "icon192.png",
+    "512": "icon512.png"
+  },
   "manifest_version": 2,
   "permissions": ["storage"],
   "chrome_url_overrides": {

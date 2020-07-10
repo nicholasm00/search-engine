@@ -107,12 +107,16 @@
   .MuiFormLabel-root.Mui-focused {
     color: #3a97ee;
   }
-}
 
-// .deleteAlert {
-//   position: absolute;
-//   bottom: 0%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   width: 600px;
-// }
+  .modal {
+    &__button {
+      &.-primary {
+        background-color: #222222;
+      }
+  
+      &.-secondary {
+        background-color: #555555;
+      }
+    }
+  }
+}

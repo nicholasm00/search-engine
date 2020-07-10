@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ColorPicker from '../colorpicker/ColorPicker';
 import DefaultBox from '../defaultbox/DefaultBox';
 import {
@@ -10,13 +10,11 @@ import {
   TextField,
   Tooltip,
   IconButton,
-  Snackbar,
-  Slide,
 } from '@material-ui/core';
 import Autocomplete, {
   createFilterOptions,
 } from '@material-ui/lab/Autocomplete';
-import { HelpIcon, CloseIcon } from '@material-ui/icons/Help';
+import { HelpIcon } from '@material-ui/icons/Help';
 import './Modal.scss';
 
 const filter = createFilterOptions();
@@ -45,55 +43,6 @@ export const ResetDashModal = ({ handleClose, resetDashboard }) => {
   );
 };
 
-// function SlideTransition(props) {
-//   return <Slide {...props} direction="up" />;
-// }
-
-// export const DeleteSearchAlert = () => {
-
-//   const [state, setState] = React.useState({
-//     open: false,
-//     Transition: Fade,
-//   });
-
-//   const handleClick = (Transition) => () => {
-//     setState({
-//       open: true,
-//       Transition,
-//     });
-//   };
-
-//   const handleClose = () => {
-//     setState({
-//       ...state,
-//       open: false,
-//     });
-//   };
-//   return (
-//     <div className="deleteAlert">
-//       <Button onClick={handleClick(SlideTransition)}>delete alert</Button>
-//       <Snackbar
-//         open={state.open}
-//         autoHideDuration={6000}
-//         onClose={handleClose}
-//         TransitionComponent={state.Transition}
-//         message="Search deleted"
-//         key={state.Transition.name}
-//         action={
-//           <React.Fragment>
-//             <Button color="secondary" size="small" onClick={handleClose}>
-//               Undo
-//             </Button>
-//             {/* <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-//               <CloseIcon fontSize="small" />
-//             </IconButton> */}
-//           </React.Fragment>
-//         }
-//       />
-//     </div>
-//   );
-// }
-
 export const EditSearchModal = ({
   deleteItem,
   name,
@@ -104,17 +53,9 @@ export const EditSearchModal = ({
   onChangeDefault,
   color,
   onChangeColor,
-  triggerAlert,
 }) => {
-
-  const handleDeleteItem = () => {
-    deleteItem();
-    //handleClick(SlideTransition);
-    triggerAlert(true);
-  }
-
   return (
-    <Card className="modal">
+    <Card className="modal" onClick={(e) => e.stopPropagation()}>
       <div className="modal__header">{`Edit '${name}'`}</div>
       <div className="modal__row">
         <TextField
@@ -132,7 +73,7 @@ export const EditSearchModal = ({
         <div className="modal__buttons">
           <Button
             className="modal__button -secondary"
-            onClick={handleDeleteItem}
+            onClick={deleteItem}
             variant="outlined"
           >
             Delete

@@ -30,7 +30,6 @@ export default function SearchButton({
   onDragStart,
   onDragOver,
   onDragEnd,
-  triggerAlert,
   setFocus,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -153,7 +152,6 @@ export default function SearchButton({
             onChangeDefault={onChangeDefault}
             color={newColor}
             onChangeColor={onChangeColor}
-            triggerAlert={triggerAlert}
           />
         </ModalContainer>
       </div>

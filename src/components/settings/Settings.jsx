@@ -10,10 +10,9 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Switch,
+  Divider,
 } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import ToggleButton from '@material-ui/lab/ToggleButton';
 import './Settings.scss';
 import '../searchbutton/SearchButton.scss';
 
@@ -30,15 +29,13 @@ const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
     <ListItem>
       <ListItemText primary="Dark mode" />
       <ListItemSecondaryAction>
-        <ToggleButton onChange={onChange} selected={darkMode} color="primary" >
-          <Brightness4Icon></Brightness4Icon>
-        </ToggleButton>
+        <Switch onChange={onChange} checked={darkMode} color="primary" />
       </ListItemSecondaryAction>
     </ListItem>
   );
 };
 
-const SettingsItemReset = ({ resetDashboard }) => {
+const SettingsItemReset = ({ resetDashboard, setSettingsOpen }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalClose = (e) => {
@@ -53,6 +50,7 @@ const SettingsItemReset = ({ resetDashboard }) => {
 
   const handleResetDashboard = () => {
     setModalOpen(false);
+    setSettingsOpen(false);
     resetDashboard();
   };
 
@@ -88,6 +86,7 @@ const SettingsCard = ({
   darkMode,
   updateDarkMode,
   resetDashboard,
+  setSettingsOpen,
 }) => {
   return (
     <ClickAwayListener onClickAway={onClickAway}>
@@ -97,7 +96,13 @@ const SettingsCard = ({
             darkMode={darkMode}
             updateDarkMode={updateDarkMode}
           />
-          <SettingsItemReset resetDashboard={resetDashboard} />
+        </List>
+        <Divider />
+        <List>
+          <SettingsItemReset
+            resetDashboard={resetDashboard}
+            setSettingsOpen={setSettingsOpen}
+          />
           {items.map((i) => (
             <SettingsItem key={i.name} name={i.name} link={i.link} />
           ))}
@@ -133,6 +138,7 @@ export default function Settings({ darkMode, updateDarkMode, resetDashboard }) {
           darkMode={darkMode}
           updateDarkMode={updateDarkMode}
           resetDashboard={resetDashboard}
+          setSettingsOpen={setOpen}
         />
       }
       open={open}
