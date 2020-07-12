@@ -5,13 +5,10 @@ import {
   CustomSearchModal,
 } from '../modal/Modal';
 import AddIcon from '@material-ui/icons/Add';
+import { randId } from '../../utils';
 import './SearchButton.scss';
 
 const INITIAL_COLOR = '#4285f4';
-
-const randId = () => {
-  return Math.random().toString(36).substr(2, 9);
-};
 
 export default function SearchButtonAdd({ addItem, data }) {
   const [addModalOpen, setAddModalOpen] = useState(false);

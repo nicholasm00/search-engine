@@ -8,30 +8,13 @@ import SearchButtonAdd from './components/searchbutton/SearchButtonAdd';
 import { Snackbar, Slide, Fade, Button, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { data, initDashboard } from './data';
+import { deepCopy, sortArr } from './utils';
 import './app.scss';
 
 const dashboardLogoLight = require('./assets/dashboard_logo_light.svg');
 const dashboardLogoDark = require('./assets/dashboard_logo_dark.svg');
 
 const MAX_DASHBOARD_LENGTH = 10;
-
-const deepCopy = (input) => {
-  if (typeof input !== 'object' || input === null) {
-    return input;
-  }
-  let output = Array.isArray(input) ? [] : {};
-  for (let key in input) {
-    let value = input[key];
-    output[key] = deepCopy(value);
-  }
-  return output;
-};
-
-const sortArr = (arr) => {
-  let sorted = deepCopy(arr);
-  sorted.sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1));
-  return sorted;
-};
 
 const SlideTransition = (props) => {
   return <Slide {...props} direction="up" />;
@@ -67,7 +50,7 @@ const AlertModal = ({ alertOpen, setAlertOpen, message, handleUndo }) => {
   const onClickUndo = () => {
     handleUndo();
     handleClose();
-  }
+  };
 
   return (
     <div className="alertModal">
@@ -102,6 +85,8 @@ export default function App() {
   const [dashboard, setDashboard] = useState(null);
   const [defaultId, setDefaultId] = useState(null);
   const [darkMode, setDarkMode] = useState(null);
+  const [autocomplete, setAutocomplete] = useState(null);
+  const [searchHistory, setSearchHistory] = useState(null);
   const [currSearch, setCurrSearch] = useState({});
   const [focus, setFocus] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -110,24 +95,32 @@ export default function App() {
   const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
   const [resetAlertOpen, setResetAlertOpen] = useState(false);
   const [savedDash, setSavedDash] = useState(null);
+  const [savedDefault, setSavedDefault] = useState(null);
   const [lastDeleted, setLastDeleted] = useState('');
 
   useEffect(() => {
     // chrome.storage.sync.get(null, (res) => {
     //   let val = res['chrome-storage-dashboard'];
-    //   updateDashboard(val === undefined ? deepCopy(initDashboard) : val);
+    //   let dash = val === undefined ? deepCopy(initDashboard) : val;
+    //   updateDashboard(dash);
     //   val = res['chrome-storage-default-id'];
     //   let defId = val === undefined ? data[0].id : val;
     //   updateDefaultId(defId);
-    //   setCurrSearch(data.find((item) => item.id === defId));
+    //   setCurrSearch(dash.find((item) => item.id === defId));
     //   val = res['chrome-storage-dark-mode'];
     //   updateDarkMode(val === undefined ? false : val);
+    //   val = res['chrome-storage-autocomplete'];
+    //   updateAutocomplete(val === undefined ? true : val);
+    //   val = res['chrome-storage-search-history'];
+    //   updateSearchHistory(val === undefined ? [] : val);
     //   setLoading(false);
     // });
     setDashboard(deepCopy(initDashboard));
     setDefaultId(data[0].id);
-    setDarkMode(false);
     setCurrSearch(data[0]);
+    setDarkMode(false);
+    setAutocomplete(true);
+    setSearchHistory([]);
     setLoading(false);
   }, []);
 
@@ -143,22 +136,34 @@ export default function App() {
 
   const updateDashboard = (val) => {
     setDashboard(val);
-    //chrome.storage.sync.set({ 'chrome-storage-dashboard': val });
+    // chrome.storage.sync.set({ 'chrome-storage-dashboard': val });
   };
 
   const updateDefaultId = (val) => {
     setDefaultId(val);
-    //chrome.storage.sync.set({ 'chrome-storage-default-id': val });
+    // chrome.storage.sync.set({ 'chrome-storage-default-id': val });
   };
 
   const updateDarkMode = (val) => {
     setDarkMode(val);
-    //chrome.storage.sync.set({ 'chrome-storage-dark-mode': val });
+    // chrome.storage.sync.set({ 'chrome-storage-dark-mode': val });
+  };
+
+  const updateAutocomplete = (val) => {
+    setAutocomplete(val);
+    // chrome.storage.sync.set({ 'chrome-storage-autocomplete': val });
+  };
+
+  const updateSearchHistory = (val) => {
+    setSearchHistory(val);
+    // chrome.storage.sync.set({ 'chrome-storage-search-history': val });
   };
 
   const resetDashboard = () => {
     setSavedDash(deepCopy(dashboard));
+    setSavedDefault(defaultId);
     updateDashboard(deepCopy(initDashboard));
+    updateDefaultId(data[0].id);
     setResetAlertOpen(true);
   };
 
@@ -171,6 +176,7 @@ export default function App() {
     const found = dashboard.find((item) => item.id === id);
     setLastDeleted(found);
     setSavedDash(deepCopy(dashboard));
+    setSavedDefault(defaultId);
     let newDash = dashboard.filter((item) => item.id !== id);
     updateDashboard(newDash);
     if (id === currSearch.id) {
@@ -223,7 +229,8 @@ export default function App() {
 
   const handleUndo = () => {
     setDashboard(savedDash);
-  }
+    setDefaultId(savedDefault);
+  };
 
   return (
     !loading && (
@@ -233,7 +240,13 @@ export default function App() {
             className="app__dashboard__logo"
             src={darkMode ? dashboardLogoDark : dashboardLogoLight}
           />
-          <SearchBar searchData={currSearch} focus={focus} />
+          <SearchBar
+            searchData={currSearch}
+            focus={focus}
+            autocomplete={autocomplete}
+            searchHistory={searchHistory}
+            updateSearchHistory={updateSearchHistory}
+          />
           <div className="app__dashboard__buttons">
             {dashboard.map((item, index) => (
               <SearchButton
@@ -265,6 +278,8 @@ export default function App() {
           <Settings
             darkMode={darkMode}
             updateDarkMode={updateDarkMode}
+            autocomplete={autocomplete}
+            updateAutocomplete={updateAutocomplete}
             resetDashboard={resetDashboard}
           />
         </div>

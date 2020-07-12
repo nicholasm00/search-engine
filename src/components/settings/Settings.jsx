@@ -35,6 +35,21 @@ const SettingsItemDarkMode = ({ darkMode, updateDarkMode }) => {
   );
 };
 
+const SettingsItemHistory = ({ autocomplete, updateAutocomplete }) => {
+  const onChange = (event, value) => {
+    updateAutocomplete(value);
+  };
+
+  return (
+    <ListItem>
+      <ListItemText primary="Show search history" />
+      <ListItemSecondaryAction>
+        <Switch onChange={onChange} checked={autocomplete} color="primary" />
+      </ListItemSecondaryAction>
+    </ListItem>
+  );
+};
+
 const SettingsItemReset = ({ resetDashboard, setSettingsOpen }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -85,6 +100,8 @@ const SettingsCard = ({
   onClickAway,
   darkMode,
   updateDarkMode,
+  autocomplete,
+  updateAutocomplete,
   resetDashboard,
   setSettingsOpen,
 }) => {
@@ -95,6 +112,10 @@ const SettingsCard = ({
           <SettingsItemDarkMode
             darkMode={darkMode}
             updateDarkMode={updateDarkMode}
+          />
+          <SettingsItemHistory
+            autocomplete={autocomplete}
+            updateAutocomplete={updateAutocomplete}
           />
         </List>
         <Divider />
@@ -112,7 +133,13 @@ const SettingsCard = ({
   );
 };
 
-export default function Settings({ darkMode, updateDarkMode, resetDashboard }) {
+export default function Settings({
+  darkMode,
+  updateDarkMode,
+  autocomplete,
+  updateAutocomplete,
+  resetDashboard,
+}) {
   const [open, setOpen] = useState(false);
 
   const onClick = () => {
@@ -138,6 +165,8 @@ export default function Settings({ darkMode, updateDarkMode, resetDashboard }) {
           darkMode={darkMode}
           updateDarkMode={updateDarkMode}
           resetDashboard={resetDashboard}
+          autocomplete={autocomplete}
+          updateAutocomplete={updateAutocomplete}
           setSettingsOpen={setOpen}
         />
       }

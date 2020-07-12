@@ -23,6 +23,7 @@
   &__header {
     margin-bottom: 10px;
     font-weight: 600;
+    font-size: 15px;
   }
 
   &__buttons {
@@ -53,7 +54,7 @@
 
   &__link {
     cursor: pointer;
-    color: #1f63db;
+    text-decoration: underline !important;
   }
 
   &.-confirmation {
@@ -134,10 +135,6 @@
           background-color: #5e5e5e;
         }
       }
-    }
-
-    &__link {
-      color: #3f99ed;
     }
   }
 }

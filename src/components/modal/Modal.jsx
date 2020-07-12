@@ -208,7 +208,11 @@ export const CustomSearchModal = ({
       </div>
       <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modal__row">
-        <Button onClick={handleClose} variant="outlined">
+        <Button
+          onClick={handleClose}
+          variant="outlined"
+          className="modal__button -secondary"
+        >
           Cancel
         </Button>
         <Button

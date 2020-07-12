@@ -7,6 +7,10 @@
     width: 100%;
     background-color: transparent !important;
   }
+
+  .MuiInputAdornment-positionEnd {
+    margin-right: -30px;
+  }
 }
 
 .searchIcon {
@@ -31,6 +35,25 @@ fieldset {
 
 .MuiInputLabel-outlined.MuiInputLabel-shrink {
   color: black !important;
+}
+
+.searchResult {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  &__icon {
+    visibility: hidden;
+    height: 30px;
+    width: 30px;
+  }
+
+  &:hover {
+    .searchResult__icon {
+      visibility: visible;
+    }
+  }
 }
 
 .-dark {
