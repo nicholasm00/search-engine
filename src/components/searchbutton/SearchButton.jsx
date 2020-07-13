@@ -134,8 +134,8 @@ export default function SearchButton({
               draggable={false}
             />
           ) : (
-            <LetterIcon letter={name[0]} />
-          )}
+              <LetterIcon letter={name[0]} />
+            )}
         </div>
         <span className="searchButton__label">{name}</span>
         <IconButton className="searchButton__more" onClick={handleModalOpen}>

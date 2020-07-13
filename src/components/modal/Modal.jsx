@@ -55,8 +55,15 @@ export const EditSearchModal = ({
   color,
   onChangeColor,
 }) => {
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      editItem();
+    }
+  };
+
   return (
-    <Card className="modal" onClick={(e) => e.stopPropagation()}>
+    <Card className="modal" onClick={(e) => e.stopPropagation()} onKeyPress={handleKeyPress}>
       <div className="modal__header">{`Edit '${name}'`}</div>
       <div className="modal__row">
         <TextField
@@ -136,6 +143,24 @@ const HomeHelpTooltip = () => {
   );
 };
 
+const FaviconHelpTooltip = () => {
+  return (
+    <div className="tooltip">
+      <p>
+        Simply add{' '}
+        <span className="tooltip__favicon -suffix">/favicon.ico</span> to
+        the end of the homepage link. For example, Amazon's favicon link is
+      </p>
+      <div className="tooltip__row">
+        <span className="tooltip__favicon -homepage">
+          https://www.amazon.com
+        </span>
+        <span className="tooltip__favicon -suffix">/favicon.ico</span>
+      </div>
+    </div>
+  );
+};
+
 export const CustomSearchModal = ({
   addCustom,
   handleClose,
@@ -154,7 +179,7 @@ export const CustomSearchModal = ({
 }) => {
   return (
     <Card className="modal -addCustom">
-      <div>Add Custom Search</div>
+      <div className="modal__header -addSearch">Add Custom Search</div>
       <div className="modal__row">
         <TextField
           onChange={onChangeName}
@@ -205,6 +230,11 @@ export const CustomSearchModal = ({
           variant="filled"
           size="small"
         />
+        <Tooltip title={<FaviconHelpTooltip />}>
+          <IconButton>
+            <HelpIcon />
+          </IconButton>
+        </Tooltip>
       </div>
       <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modal__row">
@@ -252,7 +282,7 @@ export const AddSearchModal = ({
 
   return (
     <Card className="modal -addSearch">
-      <div>Add Search</div>
+      <div className="modal__header -addSearch">Add Search</div>
       <div className="modal__row">
         <Autocomplete
           onChange={onChangeSite}
