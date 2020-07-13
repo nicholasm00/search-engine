@@ -164,6 +164,7 @@ export default function App() {
     setSavedDefault(defaultId);
     updateDashboard(deepCopy(initDashboard));
     updateDefaultId(data[0].id);
+    setCurrSearch(data[0]);
     setResetAlertOpen(true);
   };
 

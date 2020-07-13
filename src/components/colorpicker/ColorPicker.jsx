@@ -42,7 +42,7 @@ export default function ColorPicker({ color, onChangeColor }) {
               color={color}
               colors={colorArr}
               onChangeComplete={onChangeComplete}
-              triangle={"hide"}
+              triangle={'hide'}
             />
           </div>
         </ClickAwayListener>
@@ -51,7 +51,7 @@ export default function ColorPicker({ color, onChangeColor }) {
       placement="right"
     >
       <IconButton onClick={onClick} style={{ backgroundColor: color }}>
-        <ColorLensIcon />
+        <ColorLensIcon className="colorPicker__icon" />
       </IconButton>
     </Tooltip>
   );

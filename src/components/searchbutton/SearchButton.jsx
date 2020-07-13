@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ModalContainer, EditSearchModal } from '../modal/Modal';
 import { IconButton } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -36,6 +36,12 @@ export default function SearchButton({
   const [newName, setNewName] = useState(name);
   const [newDefault, setNewDefault] = useState(isDefault);
   const [newColor, setNewColor] = useState(color);
+
+  useEffect(() => {
+    setNewName(name);
+    setNewDefault(isDefault);
+    setNewColor(color);
+  }, [name, isDefault, color]);
 
   const updateSearchFunc = () => {
     updateSearch(id);

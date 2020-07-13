@@ -1,3 +1,15 @@
 .colorPicker {
   margin: 55px 0 0 30px;
+
+  &__icon {
+    color: #ffffff;
+  }
+}
+
+.-dark {
+  .colorPicker__icon {
+    path {
+      color: #ffffff;
+    }
+  }
 }
