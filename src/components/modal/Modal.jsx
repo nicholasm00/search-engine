@@ -143,24 +143,6 @@ const HomeHelpTooltip = () => {
   );
 };
 
-const FaviconHelpTooltip = () => {
-  return (
-    <div className="tooltip">
-      <p>
-        Simply add{' '}
-        <span className="tooltip__favicon -suffix">/favicon.ico</span> to
-        the end of the homepage link. For example, Amazon's favicon link is
-      </p>
-      <div className="tooltip__row">
-        <span className="tooltip__favicon -homepage">
-          https://www.amazon.com
-        </span>
-        <span className="tooltip__favicon -suffix">/favicon.ico</span>
-      </div>
-    </div>
-  );
-};
-
 export const CustomSearchModal = ({
   addCustom,
   handleClose,
@@ -230,11 +212,6 @@ export const CustomSearchModal = ({
           variant="filled"
           size="small"
         />
-        <Tooltip title={<FaviconHelpTooltip />}>
-          <IconButton>
-            <HelpIcon />
-          </IconButton>
-        </Tooltip>
       </div>
       <DefaultBox onChangeDefault={onChangeDefault} isDefault={isDefault} />
       <div className="modal__row">
