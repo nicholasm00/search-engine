@@ -20,7 +20,19 @@ import './Modal.scss';
 
 const filter = createFilterOptions();
 
+const handleKeyDownListener = (onKeyDown) => {
+  document.addEventListener("keydown", onKeyDown, false);
+
+  return () => {
+    document.removeEventListener("keydown", onKeyDown, false);
+  };
+}
+
 export const ResetDashModal = ({ handleClose, resetDashboard }) => {
+  useEffect(() => {
+    handleKeyDownListener(keyDownFunction);
+  }, []);
+
   const keyDownFunction = (event) => {
     if (event.key === 'Enter') {
       resetDashboard();
@@ -28,14 +40,6 @@ export const ResetDashModal = ({ handleClose, resetDashboard }) => {
       handleClose(event);
     }
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownFunction, false);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownFunction, false);
-    };
-  }, []);
 
   return (
     <Card className="modal -confirmation">
@@ -70,22 +74,17 @@ export const EditSearchModal = ({
   onChangeDefault,
   color,
   onChangeColor,
+  yea,
 }) => {
+  useEffect(() => {
+    handleKeyDownListener(keyDownFunction);
+  }, []);
+
   const keyDownFunction = (event) => {
-    if (event.key === 'Enter') {
-      editItem();
-    } else if (event.keyCode === 27) {
+    if (event.keyCode === 27) {
       handleClose(event);
     }
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownFunction, false);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownFunction, false);
-    };
-  }, []);
 
   return (
     <Card className="modal" onClick={(e) => e.stopPropagation()}>
@@ -184,21 +183,15 @@ export const CustomSearchModal = ({
   color,
   onChangeColor,
 }) => {
+  useEffect(() => {
+    handleKeyDownListener(keyDownFunction);
+  }, []);
+
   const keyDownFunction = (event) => {
-    if (event.key === 'Enter') {
-      addCustom();
-    } else if (event.keyCode === 27) {
+    if (event.keyCode === 27) {
       handleClose(event);
     }
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownFunction, false);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownFunction, false);
-    };
-  }, []);
 
   return (
     <Card className="modal -addCustom">
@@ -286,6 +279,10 @@ export const AddSearchModal = ({
   onChangeColor,
   onCreateCustom,
 }) => {
+  useEffect(() => {
+    handleKeyDownListener(keyDownFunction);
+  }, []);
+  
   const filterOptions = (options, params) => {
     const filtered = filter(options, params);
     const inputValue = params.inputValue;
@@ -299,20 +296,10 @@ export const AddSearchModal = ({
   };
 
   const keyDownFunction = (event) => {
-    if (event.key === 'Enter') {
-      addItem();
-    } else if (event.keyCode === 27) {
+    if (event.keyCode === 27) {
       handleClose(event);
     }
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownFunction, false);
-
-    return () => {
-      document.removeEventListener("keydown", keyDownFunction, false);
-    };
-  }, []);
 
   return (
     <Card className="modal -addSearch">

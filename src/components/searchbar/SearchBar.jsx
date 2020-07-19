@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { TextField, InputAdornment, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
-import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './SearchBar.scss';
 
@@ -116,7 +115,6 @@ export default function SearchBar({
         renderOption={(option) => {
           return (
             <div className="searchResult" onClick={() => setOpen(false)}>
-              <QueryBuilderIcon />
               {option}
               <IconButton
                 className="searchResult__icon"
