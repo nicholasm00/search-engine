@@ -20,20 +20,16 @@ import './Modal.scss';
 
 const filter = createFilterOptions();
 
-const handleKeyDownListener = (onKeyDown) => {
-  document.addEventListener("keydown", onKeyDown, false);
-
-  return () => {
-    document.removeEventListener("keydown", onKeyDown, false);
-  };
-}
-
 export const ResetDashModal = ({ handleClose, resetDashboard }) => {
   useEffect(() => {
-    handleKeyDownListener(keyDownFunction);
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false);
+    };
   }, []);
 
-  const keyDownFunction = (event) => {
+  const onKeyDown = (event) => {
     if (event.key === 'Enter') {
       resetDashboard();
     } else if (event.keyCode === 27) {
@@ -74,20 +70,33 @@ export const EditSearchModal = ({
   onChangeDefault,
   color,
   onChangeColor,
-  yea,
 }) => {
   useEffect(() => {
-    handleKeyDownListener(keyDownFunction);
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false);
+    };
   }, []);
 
-  const keyDownFunction = (event) => {
+  const onKeyDown = (event) => {
     if (event.keyCode === 27) {
       handleClose(event);
     }
   };
 
+  const onKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      editItem(event);
+    }
+  };
+
   return (
-    <Card className="modal" onClick={(e) => e.stopPropagation()}>
+    <Card
+      className="modal"
+      onClick={(e) => e.stopPropagation()}
+      onKeyPress={onKeyPress}
+    >
       <div className="modal__header">{`Edit '${name}'`}</div>
       <div className="modal__row">
         <TextField
@@ -184,17 +193,27 @@ export const CustomSearchModal = ({
   onChangeColor,
 }) => {
   useEffect(() => {
-    handleKeyDownListener(keyDownFunction);
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false);
+    };
   }, []);
 
-  const keyDownFunction = (event) => {
+  const onKeyDown = (event) => {
     if (event.keyCode === 27) {
       handleClose(event);
     }
   };
 
+  const onKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      addCustom(event);
+    }
+  };
+
   return (
-    <Card className="modal -addCustom">
+    <Card className="modal -addCustom" onKeyPress={onKeyPress}>
       <div className="modal__header -addSearch">Add Custom Search</div>
       <div className="modal__row">
         <TextField
@@ -280,9 +299,13 @@ export const AddSearchModal = ({
   onCreateCustom,
 }) => {
   useEffect(() => {
-    handleKeyDownListener(keyDownFunction);
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, false);
+    };
   }, []);
-  
+
   const filterOptions = (options, params) => {
     const filtered = filter(options, params);
     const inputValue = params.inputValue;
@@ -295,14 +318,20 @@ export const AddSearchModal = ({
     return filtered;
   };
 
-  const keyDownFunction = (event) => {
+  const onKeyDown = (event) => {
     if (event.keyCode === 27) {
       handleClose(event);
     }
   };
 
+  const onKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      addItem(event);
+    }
+  };
+
   return (
-    <Card className="modal -addSearch">
+    <Card className="modal -addSearch" onKeyPress={onKeyPress}>
       <div className="modal__header -addSearch">Add Search</div>
       <div className="modal__row">
         <Autocomplete

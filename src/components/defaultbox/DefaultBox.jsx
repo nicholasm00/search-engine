@@ -5,7 +5,7 @@ export default function DefaultBox({ onChangeDefault, isDefault }) {
   return (
     <div>
       <FormControlLabel
-        label="Make Default"
+        label="Set as default"
         control={
           <Checkbox
             color="default"
