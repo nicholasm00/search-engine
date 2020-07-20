@@ -229,8 +229,8 @@ export default function App() {
   };
 
   const handleUndo = () => {
-    setDashboard(savedDash);
-    setDefaultId(savedDefault);
+    updateDashboard(savedDash);
+    updateDefaultId(savedDefault);
   };
 
   return (
